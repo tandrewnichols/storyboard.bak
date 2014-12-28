@@ -13,7 +13,6 @@ app.set('layout', 'layout');
 
 app.use('/assets', express.static(__dirname + '/' + nconf.get('staticFilePath')));
 
-app.use(middleware.neo4j.init);
 app.use(function(req, res) {
   res.render('layout', {layout: false});
 });
