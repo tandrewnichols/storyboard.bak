@@ -4,6 +4,7 @@ html(lang="en",ng-app="app")
     title Storyboard
     meta(name="description", content="Online story manager")
     link(rel="stylesheet", href="/assets/css/app.dark.css")
+    base(href="/")
   body
-    div Hello world
+    div#main(ui-view)
     script(src="/assets/js/app.js")

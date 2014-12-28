@@ -4,7 +4,7 @@ module.exports = {
     tasks: ['less:dev']
   },
   server: {
-    files: ['app.js', 'routes/**/*.js', 'lib/**/*.js', 'views/**/*.html'],
+    files: ['app.js', 'routes/**/*.js', 'lib/**/*.js', 'views/**/*.jade'],
     tasks: ['server'],
     options: {
       spawn: false
@@ -18,7 +18,11 @@ module.exports = {
     }
   },
   js: {
-    files: ['app/js/**/*.js', 'app/templates/**/*.html'],
+    files: ['app/js/**/*.js'],
     tasks: ['ngtemplates:dev', 'concat_sourcemap:dev', 'ngAnnotate:dev']
+  },
+  jade: {
+    files: ['app/templates/**/*.jade'],
+    tasks: ['jade:dev', 'ngtemplates:dev', 'concat_sourcemap:dev', 'ngAnnotate:dev']
   }
 };
