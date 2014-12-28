@@ -3,13 +3,13 @@ module.exports = {
     module: 'app'
   },
   dev: {
-    cwd: "app/templates",
+    cwd: "generated/templates",
     src: "**/*.html",
-    dest: "generated/template-cache.js"
+    dest: "generated/js/template-cache.js"
   },
   dist: {
-    cwd: "app/templates",
+    cwd: "public/templates",
     src: "**/*.html",
-    dest: "public/template-cache.js"
+    dest: "public/js/template-cache.js"
   }
 };

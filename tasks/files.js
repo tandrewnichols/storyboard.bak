@@ -4,7 +4,7 @@ module.exports = {
     'bower_components/bootstrap/dist/js/bootstrap.js',
     'bower_components/angular/angular.js',
     'bower_components/angular-animate/angular-animate.js',
-    'node_modules/lodash/lodash.js',
+    'bower_components/lodash/dist/lodash.js',
     'bower_components/angular-lodash/angular-lodash.js',
     'vendor/js/**/*.js',
     'app/js/app.js',

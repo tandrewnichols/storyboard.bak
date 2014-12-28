@@ -1,0 +1,28 @@
+{
+  "name": "storyboard",
+  "version": "1.0.0",
+  "homepage": "https://github.com/tandrewnichols/storyboard",
+  "authors": [
+    "Andrew Nichols <tandrewnichols@gmail.com>"
+  ],
+  "description": "Online story management",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.8",
+    "angular-animate": "~1.3.8",
+    "angular-lodash": "~0.1.2",
+    "angular-resource": "~1.3.8",
+    "bootstrap": "~3.3.1",
+    "font-awesome": "~4.2.0",
+    "jquery": "~2.1.3",
+    "lodash": "~2.4.1"
+  }
+}

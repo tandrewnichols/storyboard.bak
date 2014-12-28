@@ -15,12 +15,6 @@ module.exports = {
         cwd: 'bower_components/font-awesome/fonts',
         src: ['*'],
         dest: 'public/fonts'
-      },
-      {
-        expand: true,
-        cwd: 'fonts',
-        src: ['*'],
-        dest: 'public/fonts'
       }
     ]
   },
@@ -35,12 +29,6 @@ module.exports = {
       {
         expand: true,
         cwd: 'bower_components/font-awesome/fonts',
-        src: ['*'],
-        dest: 'generated/fonts'
-      },
-      {
-        expand: true,
-        cwd: 'fonts',
         src: ['*'],
         dest: 'generated/fonts'
       }

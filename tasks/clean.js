@@ -1,4 +1,5 @@
 module.exports = {
   'public': 'public',
-  generated: 'generated'
+  generated: 'generated',
+  templates: 'app/templates'
 };

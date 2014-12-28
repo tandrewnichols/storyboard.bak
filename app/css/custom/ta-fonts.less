@@ -1,0 +1,36 @@
+@ta-font-path: 'fonts';
+@ta-font-name: 'ta-font';
+@ta-css-prefix: ta;
+
+@font-face {
+	font-family: '@{ta-font-name}';
+	src:  url('@{ta-font-path}/@{ta-font-name}.eot?-bwjvnq');
+	src:  url('@{ta-font-path}/@{ta-font-name}.eot?#iefix-bwjvnq') format('embedded-opentype'),
+		    url('@{ta-font-path}/@{ta-font-name}.woff?-bwjvnq') format('woff'),
+		    url('@{ta-font-path}/@{ta-font-name}.ttf?-bwjvnq') format('truetype'),
+		    url('@{ta-font-path}/@{ta-font-name}.svg?-bwjvnq#@{ta-font-name}') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.@{ta-css-prefix} {
+	font-family: '@{ta-font-name}';
+	font-style: normal;
+	font-weight: normal;
+	text-transform: none;
+	line-height: 1;
+  display: inline-block;
+  position: relative;
+  top: 1px;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.@{ta-css-prefix}-nodejs:before { content: "\e600"; }
+.@{ta-css-prefix}-bower:before { content: "\e601"; }
+.@{ta-css-prefix}-grunt:before { content: "\e602"; }
+.@{ta-css-prefix}-npm:before { content: "\e603"; }
+.@{ta-css-prefix}-angular:before { content: "\e604"; }
+.@{ta-css-prefix}-npm-short:before { content: "\e605"; }

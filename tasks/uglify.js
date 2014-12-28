@@ -3,7 +3,7 @@ module.exports = {
     options: {
       sourceMap: true
     },
-    src: 'public/app.js',
-    dest: 'public/app.js'
+    src: 'public/js/app.js',
+    dest: 'public/js/app.js'
   }
 };
