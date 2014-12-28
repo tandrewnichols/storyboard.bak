@@ -1,3 +1,6 @@
 {
   "staticFilePath": "public"
+  "neo4j": {
+    "connection": "http://localhost:7474"
+  }
 }

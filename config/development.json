@@ -1,4 +1,7 @@
 {
   "PORT": 3000,
-  "staticFilePath": "generated"
+  "staticFilePath": "generated",
+  "neo4j": {
+    "connection": "http://localhost:7474"
+  }
 }
