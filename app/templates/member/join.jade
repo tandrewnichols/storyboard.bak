@@ -5,16 +5,16 @@ form.form-horizontal.mtl
   .form-group
     label.col-xs-2.control-label(for="penname") Pen name
     .col-xs-8
-      input#penname.form-control(type="text")
+      input#penname.form-control(type="text", ng-model="member.name")
   .form-group
     label.col-xs-2.control-label(for="email") Email
     .col-xs-8
-      input#email.form-control(type="email")
+      input#email.form-control(type="email", ng-model="member.email")
   .form-group
     label.col-xs-2.control-label(for="password") Password
     .col-xs-8
-      input#email.form-control(type="password")
+      input#email.form-control(type="password", ng-model="member.password")
   .form-group
-    label.col-xs-2.control-label(for="confirm") Confirm password
+    label.col-xs-2.control-label(for="confirm", ng-model="member.confirm") Confirm password
     .col-xs-8
       input#email.form-control(type="password")

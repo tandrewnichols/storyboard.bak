@@ -2,20 +2,20 @@ var path = require('path');
 var cp = require('child_process');
 var server;
 
-var kill = function() {
-  console.log('Stopping express server');
-  server.kill();
-};
-
 module.exports = function(grunt, context) {
+  var kill = function() {
+    grunt.log.writeln('Stopping express server');
+    server.kill();
+  };
+
   grunt.registerTask('server', 'Start the express server', function() {
     var done = this.async();
     if (server) {
-      console.log('Restarting the express server');
+      grunt.log.writeln('Restarting the express server');
       server.kill('SIGKILL');
       process.removeListener('exit', kill);
     } else {
-      console.log('Starting the express server');
+      grunt.log.writeln('Starting the express server');
     }
     process.on('exit', kill);
     server = cp.spawn('node', ['app'], { cwd: context.paths.root });
@@ -24,7 +24,7 @@ module.exports = function(grunt, context) {
       if (str.indexOf('Express server listening') > -1) {
         done();
       }
-      console.log(str.replace('\n', ''));
+      grunt.log.writeln(str.replace('\n', ''));
     });
   });
 };
