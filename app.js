@@ -9,6 +9,10 @@ var cookieParser = require('cookie-parser');
 var compress = require('compression');
 var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
+var expressive = require('expressive');
+var _ = require('./lib/lodash');
+
+expressive(app, { envs: ['development'], alias: { development: 'dev'} }, nconf.get('NODE_ENV') || 'development');
 
 app.set('port', nconf.get('PORT'));
 app.set('view engine', 'jade');
@@ -22,8 +26,10 @@ app.use('/assets', express.static(__dirname + '/' + nconf.get('staticFilePath'))
 
 // common middleware
 app.use(middleware.locals);
+app.use(middleware.neo4j);
 
 // api
+app.dev.use('/db', routes.dump);
 app.use('/member', routes.member);
 
 // routes

@@ -9,6 +9,9 @@
     ul.nav.navbar-nav
       li.active
         a(href="/") Home
+      if isDev
+        li
+          a(href="#", data-toggle="modal", data-target="#dump-modal") Dump
     if !member
       ul.nav.navbar-nav.navbar-right
         li: a(href="/join") Join

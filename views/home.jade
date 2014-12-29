@@ -2,3 +2,7 @@ extends layout.jade
 
 block content
   div#main(ui-view)
+
+block modals
+  if isDev
+    div(ng-include="'modals/dump.html'")

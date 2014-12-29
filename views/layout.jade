@@ -10,4 +10,6 @@ html(lang="en",ng-app="app")
     include ./header.jade
     div(class="content" class={container: !pageComponents.hideWrapper})
       block content
+    div
+      block modals
     script(src="/assets/js/app.js")

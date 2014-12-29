@@ -1,0 +1,17 @@
+#dump-modal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true", ng-controller="Graph")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
+        h4.modal-title Dump Graph Data
+      .modal-body(ng-init="getLabels()")
+        p Choose a label to dump
+        .btn-group
+          button.btn.btn-danger.dropdown-toggle(type="button", data-toggle="dropdown") {{ (selected | titleize) || 'All' }}&nbsp;
+            span.caret
+          ul.dropdown-menu(role="menu")
+            li(ng-repeat="label in labels")
+              a(href="#", ng-click="$parent.selected=label") {{ label | titleize }}
+      .modal-footer
+        button.btn.btn-default(type="button", data-dismiss="modal") Close
+        button.btn.btn-primary(type="button", ng-click="dump()") Dump
