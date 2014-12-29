@@ -2,5 +2,7 @@
   "staticFilePath": "public"
   "neo4j": {
     "connection": "http://localhost:7474"
-  }
+  },
+  "cipherKey": "c58d7581339a3af3fc43387a24cb79eb",
+  "hmacKey": "bd73e56656624fc945c009f0b4edd6e1"
 }

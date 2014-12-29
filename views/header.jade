@@ -12,7 +12,17 @@
       if isDev
         li
           a(href="#", data-toggle="modal", data-target="#dump-modal") Dump
-    if !member
+    if member
+      ul.nav.navbar-nav.navbar-right
+        li
+          a(href="#") 
+            span.glyphicon.glyphicon-user
+            span &nbsp;&nbsp;#{member.penname}
+        li
+          a(href="/logout")
+            span.glyphicon.glyphicon-log-out
+            span &nbsp;&nbsp;Logout
+    else
       ul.nav.navbar-nav.navbar-right
         li: a(href="/join") Join
         li: a(href="/login") Login

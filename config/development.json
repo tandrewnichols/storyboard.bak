@@ -3,5 +3,7 @@
   "staticFilePath": "generated",
   "neo4j": {
     "connection": "http://localhost:7474"
-  }
+  },
+  "cipherKey": "e0312193fda452cf2891094278797736",
+  "hmacKey": "953d6f59c986a11f906fca4a02796738"
 }

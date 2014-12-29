@@ -2,6 +2,8 @@ var router = module.exports = require('express').Router();
 var bcrypt = require('bcrypt');
 var _ = require('lodash');
 var uuid = require('uuid');
+var crypt = require('../lib/crypt');
+var oneYear = 365*24*60*60*1000
 
 router.post('/', function(req, res, next) {
   var data = {
@@ -16,6 +18,7 @@ router.post('/', function(req, res, next) {
         if (err) {
           next(err);
         } else {
+          res.cookie('member', crypt.encrypt(data.id), { path: '/', maxAge: oneYear });
           res.status(200).json(_.pick(data, 'penname', 'email', 'id'));
         }
       });

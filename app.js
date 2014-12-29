@@ -33,6 +33,7 @@ app.dev.use('/db', routes.dump);
 app.use('/member', routes.member);
 
 // routes
+app.use('/logout', routes.logout);
 app.use(routes.home);
 
 // error handler
