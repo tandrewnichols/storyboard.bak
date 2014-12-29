@@ -1,20 +1,23 @@
 .row
   .col-sm-offset-2.col-sm-8.well
     h1.text-center Join and begin creating today
-form.form-horizontal.mtl
+form.form-horizontal.mtl(name="registerForm", blur-track="true")
   .form-group
     label.col-xs-2.control-label(for="penname") Pen name
     .col-xs-8
-      input#penname.form-control(type="text", ng-model="member.name")
+      input#penname.form-control(type="text", ng-model="member.name", ng-required="true")
   .form-group
     label.col-xs-2.control-label(for="email") Email
     .col-xs-8
-      input#email.form-control(type="email", ng-model="member.email")
+      input#email.form-control(type="email", ng-model="member.email", ng-required="true", ng-pattern="patterns.email")
   .form-group
     label.col-xs-2.control-label(for="password") Password
     .col-xs-8
-      input#email.form-control(type="password", ng-model="member.password")
-  .form-group
-    label.col-xs-2.control-label(for="confirm", ng-model="member.confirm") Confirm password
+      input#password.form-control(type="password", ng-model="member.password", ng-required="true")
+  .form-group(ng-class="{ 'has-error': blurred['member.confirm'] && member.confirm !== member.password }")
+    label.col-xs-2.control-label(for="confirm") Confirm password
     .col-xs-8
-      input#email.form-control(type="password")
+      input#confirm.form-control(type="password", ng-model="member.confirm", ng-required="true")
+  .form-group
+    .col-xs-10.col-sm-offset-2
+      button.btn.btn-primary(type="submit", ng-click="submit()", ng-disabled="registerForm.$invalid || member.confirm !== member.password") Join
