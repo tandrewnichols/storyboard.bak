@@ -26,5 +26,6 @@ module.exports = function(grunt, context) {
       }
       grunt.log.writeln(str.replace('\n', ''));
     });
+    server.stderr.on('data', grunt.log.writeln);
   });
 };

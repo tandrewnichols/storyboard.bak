@@ -17,8 +17,7 @@ app.set('layout', 'layout');
 
 app.use(compress());
 app.use(cookieParser());
-app.use(middleware.logger.make());
-app.use(bodyParser());
+app.use(bodyParser.json());
 app.use('/assets', express.static(__dirname + '/' + nconf.get('staticFilePath')));
 
 // common middleware
