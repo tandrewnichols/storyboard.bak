@@ -13,9 +13,11 @@ app.set('layout', 'layout');
 
 app.use('/assets', express.static(__dirname + '/' + nconf.get('staticFilePath')));
 
-app.use(function(req, res) {
-  res.render('layout', {layout: false});
-});
+// common middleware
+app.use(middleware.locals);
+
+// routes
+app.use(routes.home);
 
 var server = http.createServer(app);
 var io = require('socket.io')(server);
