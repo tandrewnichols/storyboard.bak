@@ -1,21 +1,24 @@
-angular.module('app').controller('Join', function($scope, $state, Member) {
+angular.module('app').controller('Join', function($scope, $window, Member) {
   $scope.submit = function() {
-    Member.save($scope.member, function(member) {
-      if (member.id) {
-        $state.go('home');
-      }
-    }); 
+    if (_.safe($scope, 'member.penname') && _.safe($scope, 'member.email') && _.safe($scope, 'member.password') && _.safe($scope, 'member.confirm')) {
+      Member.save($scope.member, function(member) {
+        if (member.id) {
+          $window.location = '/';
+        }
+      }); 
+    }
   };
 
-  $scope.checkEmail = function() {
-    if ($scope.member && $scope.member.email) {
-      Member.get({ email: $scope.member.email }, function(results) {
-        $scope.registerForm.email.$error.taken = !results.available;
+  $scope.checkName = function() {
+    if ($scope.member && $scope.member.penname) {
+      Member.get({ penname: $scope.member.penname }, function(results) {
+        $scope.registerForm.penname.$error.taken = Boolean(results.id);
       });
     }
   };
 
   $scope.checkPassword = function() {
+    $scope.registerForm.password.$invalid = false;
     $scope.registerForm.password.$error.length = false;
     $scope.registerForm.password.$error.pattern = false;
     if ($scope.member && $scope.member.password) {

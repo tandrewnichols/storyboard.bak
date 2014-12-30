@@ -1,16 +1,16 @@
 angular.module('app').directive('blurTrack', function() {
   return {
     link: function($scope, $element, $attributes, ngModel) {
-      $scope.blurred = $scope.blurred || {};
+      var form = $attributes.name;
       $element.find('[ng-model]').each(function(index, input) {
         $input = angular.element(input);
-        var ngmodel = $input.attr('ng-model');
+        var name = $input.attr('name');
         $input.on('focus', function(event) {
-          $scope.blurred[ngmodel] = false;
+          $scope[form][name].$blurred = false;
           $scope.$apply();
         });
         $input.on('blur', function(event) {
-          $scope.blurred[ngmodel] = true;
+          $scope[form][name].$blurred = true;
           $scope.$apply();
         });
       });

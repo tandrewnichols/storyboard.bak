@@ -10,8 +10,12 @@
       li.active
         a(href="/") Home
       if isDev
-        li
-          a(href="#", data-toggle="modal", data-target="#dump-modal") Dump
+        li.dropdown
+          a.dropdown-toggle(href="#", data-toggle="dropdown")
+            | Dev Tools&nbsp;
+            b.caret
+          ul.dropdown-menu
+            li: a(href="#", data-toggle="modal", data-target="#dump-modal") Data Dump
     if member
       ul.nav.navbar-nav.navbar-right
         li

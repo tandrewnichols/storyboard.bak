@@ -29,12 +29,26 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-  if (req.query.email) {
-    req.graph.readNodesWithLabelsAndProperties('AUTHOR', { email: req.query.email }, function(err, results) {
+  if (req.query.penname) {
+    req.graph.readNodesWithLabelsAndProperties('AUTHOR', { penname: req.query.penname }, function(err, results) {
       if (err) {
         res.sendError(err);
       } else {
-        res.status(200).json({ available: !Boolean(results.length) });
+        if (req.query.password && results[0]) {
+          var pending = results[0];
+          bcrypt.compare(req.query.password, pending.password, function(err, match) {
+            if (err) {
+              res.sendError(err);
+            } else if (!match) {
+              res.sendError('Invalid pen name or password.');
+            } else {
+              res.cookie('member', crypt.encrypt(pending.id), { path: '/', maxAge: oneYear });
+              res.status(200).json(pending);
+            }
+          });
+        } else {
+          res.status(200).json(results[0]);
+        }
       }
     });
   }

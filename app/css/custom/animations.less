@@ -1,0 +1,25 @@
+.fade-in {
+  opacity: 1;
+  &.ng-hide-remove {
+    transition: all 1s ease-out;
+  }
+  &.ng-hide-add {
+    transition: all 0s;
+  }
+  &.ng-hide {
+    opacity: 0;
+  }
+}
+
+.fade-out {
+  opacity: 1;
+  &.ng-hide-remove {
+    transition: all 0s;
+  }
+  &.ng-hide-add {
+    transition: all 1s ease-out;
+  }
+  &.ng-hide {
+    opacity: 0;
+  }
+}
