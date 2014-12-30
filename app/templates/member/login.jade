@@ -1,0 +1,15 @@
+.row
+  .col-sm-offset-2.col-sm-8.well
+    h1.text-center Sign in below
+form.form-horizontal.mtl(name="registerForm", blur-track="true")
+  .form-group
+    label.col-xs-2.control-label(for="identifier") Pen name or email
+    .col-xs-8
+      input#identifier.form-control(type="text", ng-model="member.identifier", ng-required="true")
+  .form-group
+    label.col-xs-2.control-label(for="password") Password
+    .col-xs-8
+      input#password.form-control(type="password", ng-model="member.password", ng-required="true")
+  .form-group
+    .col-xs-10.col-sm-offset-2
+      button.btn.btn-primary(type="submit", ng-click="submit()", ng-disabled="registerForm.$invalid") Join

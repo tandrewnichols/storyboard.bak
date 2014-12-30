@@ -2,22 +2,30 @@
   .col-sm-offset-2.col-sm-8.well
     h1.text-center Join and begin creating today
 form.form-horizontal.mtl(name="registerForm", blur-track="true")
-  .form-group
+  .form-group(ng-class="{ 'has-error': registerForm.penname.$invalid && blurred['member.penname'] }")
     label.col-xs-2.control-label(for="penname") Pen name
     .col-xs-8
-      input#penname.form-control(type="text", ng-model="member.penname", ng-required="true")
-  .form-group
+      input#penname.form-control(type="text", name="penname" ng-model="member.penname", ng-required="true")
+      div.alert.alert-danger.mtm(ng-show="registerForm.penname.$invalid && blurred['member.penname']") Penname is required.
+  .form-group(ng-class="{ 'has-error': registerForm.email.$invalid && blurred['member.email'] }")
     label.col-xs-2.control-label(for="email") Email
     .col-xs-8
-      input#email.form-control(type="email", ng-model="member.email", ng-required="true", ng-pattern="patterns.email")
-  .form-group
+      input#email.form-control(type="email", name="email", ng-blur="checkEmail()", ng-model="member.email", ng-required="true", ng-pattern="patterns.email")
+      div.alert.alert-danger.mtm(ng-show="registerForm.email.$error.required && blurred['member.email']") Email is required.
+      div.alert.alert-danger.mtm(ng-show="registerForm.email.$error.pattern && blurred['member.email']") Please enter a valid email.
+      div.alert.alert-danger.mtm(ng-show="registerForm.email.$error.taken && blurred['member.email']") That email is already registered.
+  .form-group(ng-class="{ 'has-error': registerForm.password.$invalid && blurred['member.password'] }")
     label.col-xs-2.control-label(for="password") Password
     .col-xs-8
-      input#password.form-control(type="password", ng-model="member.password", ng-required="true")
-  .form-group(ng-class="{ 'has-error': blurred['member.confirm'] && member.confirm !== member.password }")
+      input#password.form-control(type="password", name="password", ng-blur="checkPassword()", ng-model="member.password", ng-required="true")
+      div.alert.alert-danger.mtm(ng-show="registerForm.password.$error.required && blurred['member.password']") A password is required.
+      div.alert.alert-danger.mtm(ng-show="registerForm.password.$error.length && blurred['member.password']") Passwords must be at least 6 characters
+      div.alert.alert-danger.mtm(ng-show="registerForm.password.$error.pattern && blurred['member.password']") Passwords must contain at least two different character types: upper case letters, lower case letters, numbers, and symbols.
+  .form-group(ng-class="{ 'has-error': (registerForm.password.$invalid || member.confirm !== member.password) && blurred['member.confirm'] }")
     label.col-xs-2.control-label(for="confirm") Confirm password
     .col-xs-8
-      input#confirm.form-control(type="password", ng-model="member.confirm", ng-required="true")
+      input#confirm.form-control(type="password", name="confirm", ng-model="member.confirm", ng-required="true")
+      div.alert.alert-danger.mtm(ng-show="member.confirm !== member.password && blurred['member.confirm']") Passwords must match.
   .form-group
     .col-xs-10.col-sm-offset-2
       button.btn.btn-primary(type="submit", ng-click="submit()", ng-disabled="registerForm.$invalid || member.confirm !== member.password") Join

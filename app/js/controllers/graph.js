@@ -10,9 +10,9 @@ angular.module('app').controller('Graph', function($scope, $http) {
 
   $scope.dump = function() {
     $http.get('/db/dump' + (!$scope.selected || $scope.selected === 'All' ? '' : '/' + $scope.selected.toLowerCase())).then(function(result) {
-      // TODO: handle success
-    }, function() {
-      // TODO: handle error
+      $scope.success = true;
+    }, function(error) {
+      $scope.error = error.data;
     });
   };
 });

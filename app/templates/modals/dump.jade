@@ -7,11 +7,12 @@
       .modal-body(ng-init="getLabels()")
         p Choose a label to dump
         .btn-group
-          button.btn.btn-danger.dropdown-toggle(type="button", data-toggle="dropdown") {{ (selected | titleize) || 'All' }}&nbsp;
+          button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown") {{ (selected | titleize) || 'All' }}&nbsp;
             span.caret
           ul.dropdown-menu(role="menu")
             li(ng-repeat="label in labels")
               a(href="#", ng-click="$parent.selected=label") {{ label | titleize }}
+        div.alert.alert-danger.mtl(ng-show="error") An error occurred: {{ error }}
       .modal-footer
         button.btn.btn-default(type="button", data-dismiss="modal") Close
-        button.btn.btn-primary(type="button", ng-click="dump()") Dump
+        button.btn.btn-danger(type="button", ng-click="dump()", modal-close="success") Dump

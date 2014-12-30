@@ -16,7 +16,7 @@ router.post('/', function(req, res, next) {
       data.password = hash;
       req.graph.insertNode(data, 'AUTHOR', function(err, node) {
         if (err) {
-          next(err);
+          res.sendError(err);
         } else {
           res.cookie('member', crypt.encrypt(data.id), { path: '/', maxAge: oneYear });
           res.status(200).json(_.pick(data, 'penname', 'email', 'id'));
@@ -25,5 +25,17 @@ router.post('/', function(req, res, next) {
     });
   } else {
     res.status(400).end();
+  }
+});
+
+router.get('/', function(req, res, next) {
+  if (req.query.email) {
+    req.graph.readNodesWithLabelsAndProperties('AUTHOR', { email: req.query.email }, function(err, results) {
+      if (err) {
+        res.sendError(err);
+      } else {
+        res.status(200).json({ available: !Boolean(results.length) });
+      }
+    });
   }
 });

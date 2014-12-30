@@ -27,9 +27,10 @@ app.use('/assets', express.static(__dirname + '/' + nconf.get('staticFilePath'))
 // common middleware
 app.use(middleware.locals);
 app.use(middleware.neo4j);
+app.use(middleware.extendRes);
 
 // api
-app.dev.use('/db', routes.dump);
+app.dev.use('/db', routes.db);
 app.use('/member', routes.member);
 
 // routes

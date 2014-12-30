@@ -12,4 +12,9 @@ angular.module('app').config(function($locationProvider, $stateProvider, $urlRou
       templateUrl: 'member/join.html',
       controller: 'Join'
     })
+    .state('login', {
+      url: '/login',
+      templateUrl: 'member/login.html',
+      controller: 'Login'
+    });
 });
