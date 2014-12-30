@@ -1,6 +1,11 @@
 .row
   .col-sm-offset-2.col-sm-8.well
     h1.text-center Join and begin creating today
+.row.fade-out(ng-show="error && !dismissed")
+  .col-sm-offset-2.col-sm-8
+    div.alert.alert-danger.mll.alert-dismissable
+      button.close(type="button", ng-click="dismissed=true", aria-hidden="true") &times;
+      | {{ error }}
 form.form-horizontal.mtl(name="registerForm", blur-track="")
   .form-group(ng-class="{ 'has-error': registerForm.penname.$invalid && registerForm.penname.$blurred }")
     label.col-xs-2.control-label(for="penname") Pen name
