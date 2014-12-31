@@ -5,6 +5,7 @@ module.exports = {
   files: {
     js: [
       'bower_components/jquery/dist/jquery.js',
+      'bower_components/jquery.cookie/jquery.cookie.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-animate/angular-animate.js',

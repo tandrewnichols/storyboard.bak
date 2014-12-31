@@ -1,11 +1,12 @@
-angular.module('app').controller('Join', function($scope, $window, Member) {
+angular.module('app').controller('Join', function($scope, $rootScope, $state, Member) {
   $scope.submit = function() {
     $scope.error = null;
     $scope.dismissed = false;
     if (_.safe($scope, 'member.penname') && _.safe($scope, 'member.email') && _.safe($scope, 'member.password') && _.safe($scope, 'member.confirm')) {
       Member.save($scope.member, function(member) {
         if (member.id) {
-          $window.location = '/';
+          $rootScope.member = member; 
+          $state.go('home');
         }
       }, function(response) {
         $scope.error = response.data.error;

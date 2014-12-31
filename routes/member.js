@@ -51,5 +51,14 @@ router.get('/', function(req, res, next) {
         }
       }
     });
+  } else if (req.cookies.member) {
+    var id = crypt.decrypt(req.cookies.member);
+    req.graph.readNodesWithLabelsAndProperties('AUTHOR', { id: id }, function(err, results) {
+      if (err) {
+        res.sendError(err);
+      } else {
+        res.status(200).json(results[0]);
+      }
+    });
   }
 });
