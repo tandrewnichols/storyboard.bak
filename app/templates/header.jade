@@ -1,4 +1,4 @@
-.navbar.navbar-default
+.navbar.navbar-inverse
   .navbar-header
     button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-responsive-collapse")
       span.icon-bar
@@ -14,14 +14,18 @@
         ul.dropdown-menu
           li: a(href="#", data-toggle="modal", data-target="#dump-modal") Data Dump
     ul.nav.navbar-nav.navbar-right(ng-show="$root.member")
-      li
-        a(href="#") 
+      li.dropdown
+        a.dropdown-toggle(href="#", data-toggle="dropdown")
           span.glyphicon.glyphicon-user
-          span &nbsp;&nbsp;{{ member.penname }}
+          span &nbsp;&nbsp;{{ member.penname }}&nbsp;&nbsp;
+          b.caret
+        ul.dropdown-menu
+          li: a(href="#", ui-sref="profile.personal") Profile
       li
         a(href="#", ng-controller="Logout", ng-click="logout()")
           span.glyphicon.glyphicon-log-out
           span &nbsp;&nbsp;Logout
-    ul.nav.navbar-nav.navbar-right(ng-show="!$root.member")
-      li: a(ui-sref="join") Join
-      li: a(ui-sref="login") Login
+    ul.nav.navbar-nav.navbar-right(ng-show="!$root.loadingMember && !$root.member")
+      li: a(href="#", ui-sref="join") Join
+      li: a(href="#", ui-sref="login") Login
+div(ng-if="isDev", ng-include="'modals/dump.html'")

@@ -1,0 +1,57 @@
+.well
+  h4.text-primary Change Pen Name
+  p
+    em Current pen name:&nbsp;
+      span.text-primary {{ $root.member.penname }}
+  form.form-horizontal(name="pennameForm", novalidate, blur-track="true")
+    .form-group
+      label.col-xs-2.col-sm-1.control-label(for="penname") Pen Name
+      .col-xs-10.col-sm-8
+        input#penname.form-control(type="text", name="penname", ng-model="update.penname", ng-required="true", maxlength="50", autofocus)
+    .form-group
+      .col-xs-10.col-sm-offset-1
+        button.btn.btn-primary(type="submit", ng-click="changePenname()", ng-disabled="pennameForm.$invalid") Submit
+  .alert.alert-danger.alert-dismissable.fade-out(ng-show="pennameForm.error && !pennameForm.errorDismissed")
+    button.close(type="button", ng-click="pennameForm.errorDismissed=true;", aria=hidden="true") &times;
+    | {{ pennameForm.error }}
+.well
+  h4.text-primary Change Email
+  p
+    em Current email:&nbsp;
+      span.text-primary {{ $root.member.email }}
+  form.form-horizontal(name="emailForm", novalidate, blur-track="true")
+    .form-group(ng-class="{ 'has-error': update.email && emailForm.email.$error.pattern && emailForm.email.$blurred }")
+      label.col-xs-2.col-sm-1.control-label(for="email") Email
+      .col-xs-10.col-sm-8
+        input#email.form-control(type="text", name="email", ng-model="update.email", ng-required="true", ng-pattern="patterns.email")
+        div.alert.alert-danger.mtm(ng-show="emailForm.email.$error.pattern && emailForm.email.$blurred") Please enter a valid email.
+    .form-group
+      .col-xs-10.col-sm-offset-1
+        button.btn.btn-primary(type="submit", ng-click="changeEmail()", ng-disabled="emailForm.$invalid") Submit
+  .alert.alert-danger.alert-dismissable.fade-out(ng-show="emailForm.error && !emailForm.errorDismissed")
+    button.close(type="button", ng-click="emailForm.errorDismissed=true;", aria=hidden="true") &times;
+    | {{ emailForm.error }}
+.well
+  h4.text-primary Change Password
+  form.form-horizontal(name="passwordForm", novalidate, blur-track="true")
+    .form-group
+      label.col-xs-2.control-label(for="oldPw") Current Password
+      .col-xs-10.col-sm-8
+        input#oldPw.form-control(type="password", name="oldPw", ng-model="update.oldPw", ng-required="true")
+    .form-group(ng-class="{ 'has-error': (passwordForm.newPw.$error.length || passwordForm.newPw.$error.pattern) && passwordForm.newPw.$blurred }")
+      label.col-xs-2.control-label(for="newPw") New Password
+      .col-xs-10.col-sm-8
+        input#newPw.form-control(type="password", name="newPw", ng-model="update.newPw", ng-required="true")
+        div.alert.alert-danger.mtm(ng-show="passwordForm.newPw.$error.length && passwordForm.newPw.$blurred") Passwords must be at least 6 characters
+        div.alert.alert-danger.mtm(ng-show="passwordForm.newPw.$error.pattern && passwordForm.newPw.$blurred") Passwords must contain at least two different character types: upper case letters, lower case letters, numbers, and symbols.
+    .form-group(ng-class="{ 'has-error': update.confirm !== update.newPw && passwordForm.confirm.$blurred }")
+      label.col-xs-2.control-label(for="confirm") Confirm Password
+      .col-xs-10.col-sm-8
+        input#confirm.form-control(type="password", name="confirm", ng-model="update.confirm", ng-required="true")
+        div.alert.alert-danger.mtm(ng-show="update.confirm !== update.newPw && passwordForm.confirm.$blurred") Passwords must match.
+    .form-group
+      .col-xs-10.col-sm-offset-1
+        button.btn.btn-primary(type="submit", ng-click="changePassword()", ng-disabled="passwordForm.$invalid || update.newPw !== update.confirm") Submit
+  .alert.alert-danger.alert-dismissable.fade-out(ng-show="passwordForm.error && !passwordForm.errorDismissed")
+    button.close(type="button", ng-click="passwordForm.errorDismissed=true;", aria=hidden="true") &times;
+    | {{ passwordForm.error }}

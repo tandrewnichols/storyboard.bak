@@ -1,12 +1,12 @@
-angular.module('app').controller('Login', function($scope, $rootScope, $state, Member) {
+angular.module('app').controller('Login', function($scope, Api) {
   $scope.submit = function() {
     $scope.error = null;
     $scope.dismissed = false;
-    if (_.safe($scope, 'member.penname') && _.safe($scope, 'member.password')) {
-      Member.get($scope.member, function(member) {
+    if (_.safe($scope, 'member.email') && _.safe($scope, 'member.password')) {
+      Api.Member.get($scope.member, function(member) {
         if (member.id) {
-          $rootScope.member = member;
-          $state.go('home');
+          $scope.$root.member = member;
+          $scope.state.go('home');
         }
       }, function(response) {
         $scope.error = response.data.error;

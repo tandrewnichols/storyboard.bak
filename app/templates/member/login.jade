@@ -7,11 +7,11 @@
       button.close(type="button", ng-click="dismissed=true", aria-hidden="true") &times;
       | {{ error }}
 form.form-horizontal.mtl(name="loginForm", blur-track="true")
-  .form-group(ng-class="{ 'has-error': loginForm.penname.$invalid && loginForm.penname.$blurred }")
-    label.col-xs-2.control-label(for="penname") Pen name
+  .form-group(ng-class="{ 'has-error': loginForm.email.$invalid && loginForm.email.$blurred }")
+    label.col-xs-2.control-label(for="email") Email
     .col-xs-8
-      input#penname.form-control(type="text", name="penname", ng-model="member.penname", ng-required="true")
-      div.alert.alert-danger.mtm(ng-show="loginForm.penname.$invalid && loginForm.penname.$blurred") This field is required.
+      input#email.form-control(type="text", name="email", ng-model="member.email", ng-required="true", autofocus)
+      div.alert.alert-danger.mtm(ng-show="loginForm.email.$invalid && loginForm.email.$blurred") This field is required.
   .form-group(ng-class="{ 'has-error': loginForm.password.$invalid && loginForm.password.$blurred }")
     label.col-xs-2.control-label(for="password") Password
     .col-xs-8

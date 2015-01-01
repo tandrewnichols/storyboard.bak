@@ -1,7 +1,11 @@
-angular.module('app').controller('Header', function($scope, $rootScope, Member) {
-  Member.get({}, function(member) {
+angular.module('app').controller('Header', function($scope, Api) {
+  $scope.$root.loadingMember = true;
+  Api.Member.get({}, function(member) {
     if (member.id) {
-      $rootScope.member = member;
+      $scope.$root.member = member;
+      $scope.$root.loadingMember = false;
     }
+  }, function(error) {
+    $scope.$root.loadingMember = false;  
   });
 });

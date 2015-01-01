@@ -10,15 +10,15 @@ form.form-horizontal.mtl(name="registerForm", blur-track="")
   .form-group(ng-class="{ 'has-error': registerForm.penname.$invalid && registerForm.penname.$blurred }")
     label.col-xs-2.control-label(for="penname") Pen name
     .col-xs-8
-      input#penname.form-control(type="text", name="penname", ng-blur="checkName()", ng-model="member.penname", ng-required="true")
+      input#penname.form-control(type="text", name="penname", ng-model="member.penname", ng-required="true", maxlength="50", autofocus)
       div.alert.alert-danger.mtm(ng-show="registerForm.penname.$error.required && registerForm.penname.$blurred") This field is required.
-      div.alert.alert-danger.mtm(ng-show="registerForm.penname.$error.taken && registerForm.penname.$blurred") That pen name is already registered.
   .form-group(ng-class="{ 'has-error': registerForm.email.$invalid && registerForm.email.$blurred }")
     label.col-xs-2.control-label(for="email") Email
     .col-xs-8
-      input#email.form-control(type="email", name="email", ng-model="member.email", ng-required="true", ng-pattern="patterns.email")
+      input#email.form-control(type="email", name="email", ng-blur="checkEmail()", ng-model="member.email", ng-required="true", ng-pattern="patterns.email")
       div.alert.alert-danger.mtm(ng-show="registerForm.email.$error.required && registerForm.email.$blurred") This field is required.
       div.alert.alert-danger.mtm(ng-show="registerForm.email.$error.pattern && registerForm.email.$blurred") Please enter a valid email.
+      div.alert.alert-danger.mtm(ng-show="registerForm.email.$error.taken && registerForm.email.$blurred") That email is already registered.
   .form-group(ng-class="{ 'has-error': registerForm.password.$invalid && registerForm.password.$blurred }")
     label.col-xs-2.control-label(for="password") Password
     .col-xs-8
@@ -26,7 +26,7 @@ form.form-horizontal.mtl(name="registerForm", blur-track="")
       div.alert.alert-danger.mtm(ng-show="registerForm.password.$error.required && registerForm.password.$blurred") This field is required.
       div.alert.alert-danger.mtm(ng-show="registerForm.password.$error.length && registerForm.password.$blurred") Passwords must be at least 6 characters
       div.alert.alert-danger.mtm(ng-show="registerForm.password.$error.pattern && registerForm.password.$blurred") Passwords must contain at least two different character types: upper case letters, lower case letters, numbers, and symbols.
-  .form-group(ng-class="{ 'has-error': (registerForm.password.$invalid || member.confirm !== member.password) && registerForm.confirm.$blurred }")
+  .form-group(ng-class="{ 'has-error': (registerForm.confirm.$invalid || member.confirm !== member.password) && registerForm.confirm.$blurred }")
     label.col-xs-2.control-label(for="confirm") Confirm password
     .col-xs-8
       input#confirm.form-control(type="password", name="confirm", ng-model="member.confirm", ng-required="true")
