@@ -4,6 +4,9 @@ var _ = require('lodash');
 var uuid = require('uuid');
 var crypt = require('../lib/crypt');
 var oneYear = 365*24*60*60*1000
+var crypto = require('crypto');
+var gravatar = 'http://www.gravatar.com/avatar/%s?d=mm';
+var util = require('util');
 
 var neoResponseCallback = function(res, err, nodes) {
   if (err) res.sendError(err);
@@ -22,9 +25,14 @@ router.post('/:id', function(req, res, next) {
 }); 
 
 router.post('/', function(req, res, next) {
+  var md5 = crypto.createHash('md5');
+  md5.update(req.body.email);
   var data = {
     penname: req.body.penname,
     email: req.body.email,
+    theme: 'spacelab',
+    inverse: false,
+    gravatar: util.format(gravatar, md5.digest('hex')),
     id: uuid.v4()
   };
   if (req.body.password === req.body.confirm) {
@@ -69,7 +77,11 @@ router.put('/:id', function(req, res, next) {
     req.graph.find('AUTHOR', { email: req.body.email }, function(err, nodes) {
       if (err) res.sendError(err);
       else if (nodes.length) res.status(400).json({ error: 'That email is already registered.' });
-      else req.graph.update('AUTHOR', { id: req.params.id }, { email: req.body.email }, neoResponseCallback.bind(null, res));
+      else {
+        var md5 = crypto.createHash('md5');
+        md5.update(req.body.email);
+        req.graph.update('AUTHOR', { id: req.params.id }, { email: req.body.email, gravatar: util.format(gravatar, md5.digest('hex')) }, neoResponseCallback.bind(null, res));
+      }
     });
   } else if (req.body.oldPw) {
     req.graph.find('AUTHOR', { id: req.params.id }, function(err, nodes) {

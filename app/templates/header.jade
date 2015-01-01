@@ -1,4 +1,4 @@
-.navbar.navbar-inverse
+.navbar(ng-class="{ 'navbar-default': !$root.member.inverse, 'navbar-inverse': $root.member.inverse }")
   .navbar-header
     button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-responsive-collapse")
       span.icon-bar
@@ -15,8 +15,7 @@
           li: a(href="#", data-toggle="modal", data-target="#dump-modal") Data Dump
     ul.nav.navbar-nav.navbar-right(ng-show="$root.member")
       li.dropdown
-        a.dropdown-toggle(href="#", data-toggle="dropdown")
-          span.glyphicon.glyphicon-user
+        a.dropdown-toggle(href="#", data-toggle="dropdown", style="width:100%; background-image: url('{{ member.gravatar }}&s=32'); background-repeat:no-repeat; padding-left: 50px; background-position: 10px 50%; background-size: 32px;")
           span &nbsp;&nbsp;{{ member.penname }}&nbsp;&nbsp;
           b.caret
         ul.dropdown-menu

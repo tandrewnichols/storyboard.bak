@@ -1,0 +1,27 @@
+.well(ng-if="$root.member", ng-init="update={ theme: $root.member.theme, inverse: $root.member.inverse }")
+  .row
+    .col-xs-1(style="margin-top: 9px;") Theme*
+    .col-xs-11
+      .btn-group
+        a.btn.btn-primary(href="#", data-toggle="dropdown") {{ update.theme }}
+        a.btn.btn-primary.dropdown-toggle(href="#", data-toggle="dropdown")
+          span.caret
+        ul.dropdown-menu
+          li: a(href="#", ng-click="update.theme='cerulean'") Cerulean
+          li: a(href="#", ng-click="update.theme='darkly'") Darkly
+          li: a(href="#", ng-click="update.theme='flatly'") Flatly
+          li: a(href="#", ng-click="update.theme='sandstone'") Sandstone
+          li: a(href="#", ng-click="update.theme='slate'") Slate
+          li: a(href="#", ng-click="update.theme='spacelab'") Spacelab
+  .row.mtl
+    .col-xs-1(style="margin-top: 9px;") Inverse
+    .col-xs-10
+      .btn-group
+        a.btn(ng-class="{ 'btn-primary': update.inverse, 'btn-default': !update.inverse }", ng-click="update.inverse = !update.inverse") On
+        a.btn(ng-class="{ 'btn-primary': !update.inverse, 'btn-default': update.inverse }", ng-click="update.inverse = !update.inverse") Off
+  .row.mtx
+    .col-sm-offset-1.col-xs-2
+      button.btn.btn-primary.btn-block(ng-click="submit(update)", type="submit", ng-disabled="update.theme === $root.member.theme && update.inverse === $root.member.inverse") Submit
+  .row.mtl
+    .col-xs-12
+      em.text-muted * Changes will not take affect until you refresh the page.

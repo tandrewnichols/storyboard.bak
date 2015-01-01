@@ -24,8 +24,11 @@ module.exports = function(grunt, context) {
       if (str.indexOf('Express server listening') > -1) {
         done();
       }
-      grunt.log.writeln(str.replace('\n', ''));
+      grunt.log.write(str);
     });
-    server.stderr.on('data', grunt.log.writeln);
+    server.stderr.on('data', function(data) {
+      grunt.log.write(data.toString());  
+      done();
+    });
   });
 };
