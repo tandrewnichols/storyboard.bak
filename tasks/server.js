@@ -1,7 +1,6 @@
 var path = require('path');
 var cp = require('child_process');
 var chalk = require('chalk');
-var one = 1;
 var server;
 
 module.exports = function(grunt, context) {
@@ -31,11 +30,10 @@ module.exports = function(grunt, context) {
     server.stderr.on('data', function(data) {
       var d = data.toString();
       grunt.log.write(d);
-      if (one !== 1 && d.indexOf('Error: connect ECONNREFUSED')) {
+      if (d.indexOf('Error: connect ECONNREFUSED') > -1) {
         grunt.log.writeln();
         grunt.log.writeln(chalk.red('Maybe the neo4j server is not running?'));
       }
-      one = 2;
       done();
     });
   });
