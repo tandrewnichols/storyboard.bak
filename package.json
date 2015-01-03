@@ -50,7 +50,7 @@
     "lodash": "^2.4.1",
     "moment": "^2.8.4",
     "nconf": "^0.7.1",
-    "node-neo4j": "^2.0.0-RC6",
+    "neo4jmapper": "^1.0.1",
     "safe-obj": "^1.0.2",
     "socket.io": "^1.2.1",
     "task-master": "^2.2.0",

@@ -1,16 +1,17 @@
 var nconf = require('./lib/nconf').init();
+var _ = require('./lib/lodash');
 var http = require('http');
 var express = require('express');
 var app = express();
 var fm = require('file-manifest');
 var routes = fm.generate('./routes');
 var middleware = fm.generate('./lib/middleware');
+var models = fm.generate('./models');
 var cookieParser = require('cookie-parser');
 var compress = require('compression');
 var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
 var expressive = require('expressive');
-var _ = require('./lib/lodash');
 
 expressive(app, { envs: ['development'], alias: { development: 'dev'} }, nconf.get('NODE_ENV') || 'development');
 

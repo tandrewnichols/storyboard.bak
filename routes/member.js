@@ -5,7 +5,6 @@ var uuid = require('uuid');
 var crypt = require('../lib/crypt');
 var oneYear = 365*24*60*60*1000
 var crypto = require('crypto');
-var gravatar = 'http://www.gravatar.com/avatar/%s?d=mm';
 var util = require('util');
 
 var neoResponseCallback = function(res, err, nodes) {
