@@ -66,8 +66,11 @@ router.get('/', function(req, res, next) {
         }
       }
     });
-  } else if (req.cookies.member) req.graph.find('AUTHOR', { id: crypt.decrypt(req.cookies.member) }, neoResponseCallback.bind(null, res));
-  else res.status(404).end();
+  } else if (req.cookies.member) {
+    req.graph.find('AUTHOR', { id: crypt.decrypt(req.cookies.member) }, neoResponseCallback.bind(null, res));
+  } else {
+    res.status(404).end();
+  }
 });
 
 router.put('/:id', function(req, res, next) {
