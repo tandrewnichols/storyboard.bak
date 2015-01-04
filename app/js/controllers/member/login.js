@@ -4,7 +4,7 @@ angular.module('app').controller('Login', function($scope, Api) {
     $scope.dismissed = false;
     if (_.safe($scope, 'member.email') && _.safe($scope, 'member.password')) {
       Api.Member.get($scope.member, function(member) {
-        if (member.id) {
+        if (member.uid) {
           $scope.$root.member = member;
           $scope.state.go('home');
         }

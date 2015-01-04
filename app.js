@@ -10,7 +10,6 @@ var models = fm.generate('./models');
 var cookieParser = require('cookie-parser');
 var compress = require('compression');
 var bodyParser = require('body-parser');
-var errorHandler = require('errorhandler');
 var expressive = require('expressive');
 
 expressive(app, { envs: ['development'], alias: { development: 'dev'} }, nconf.get('NODE_ENV') || 'development');
@@ -38,7 +37,7 @@ app.use('/member', routes.member);
 app.use(routes.home);
 
 // error handler
-app.use(errorHandler());
+app.use(routes.error);
 
 var server = http.createServer(app);
 var io = require('socket.io')(server);
@@ -48,4 +47,9 @@ server.listen(app.get('port'), function() {
 
 io.on('connection', function(socket) {
   socket.emit('check', { foo: 'bar', baz: 'quux', bool: true, num: 2, arr: [1, 2, 3] });
+});
+
+process.on('uncaughtException', function(err) {
+  console.log(err);
+  console.log(err.stack);
 });

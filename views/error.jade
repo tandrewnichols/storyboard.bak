@@ -1,0 +1,12 @@
+extends layout.jade
+
+block content
+  div#main
+    .row
+      .col-xs-12.jumbotron
+        h1 An error occurred
+        p #{description}
+    .row
+      .col-xs-12.well
+        div #{stack}
+         

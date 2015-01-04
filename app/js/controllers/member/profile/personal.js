@@ -10,7 +10,7 @@ angular.module('app').controller('Personal', function($scope, Api) {
   $scope.changeEmail = function() {
     $scope.emailForm.error = '';
     $scope.emailForm.errorDismissed = false;
-    Api.Member.update({ id: $scope.$root.member.id, email: $scope.update.email }, function(member) {
+    Api.Member.update({ id: $scope.$root.member.uid, email: $scope.update.email }, function(member) {
       $scope.$root.member.email = $scope.update.email;
       $scope.update = {};
     }, function(response) {
@@ -43,7 +43,7 @@ angular.module('app').controller('Personal', function($scope, Api) {
   $scope.changePassword = function() {
     $scope.passwordForm.error = '';
     $scope.passwordForm.errorDismissed = '';
-    $scope.update.id = $scope.$root.member.id;
+    $scope.update.id = $scope.$root.member.uid;
     Api.Member.update($scope.update, function(member) {
       $scope.update = {};
     }, function(response) {

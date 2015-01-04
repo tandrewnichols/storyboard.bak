@@ -4,7 +4,7 @@ angular.module('app').controller('Join', function($scope, Api) {
     $scope.dismissed = false;
     if (_.safe($scope, 'member.penname') && _.safe($scope, 'member.email') && _.safe($scope, 'member.password') && _.safe($scope, 'member.confirm')) {
       Api.Member.save($scope.member, function(member) {
-        if (member.id) {
+        if (member.uid) {
           $scope.$root.member = member; 
           $scope.state.go('home');
         }
@@ -17,7 +17,7 @@ angular.module('app').controller('Join', function($scope, Api) {
   $scope.checkEmail = function() {
     if ($scope.member && $scope.member.penname) {
       Api.Member.get({ email: $scope.member.email }, function(member) {
-        $scope.registerForm.penname.$error.taken = Boolean(member.id);
+        $scope.registerForm.penname.$error.taken = Boolean(member.uid);
       });
     }
   };
