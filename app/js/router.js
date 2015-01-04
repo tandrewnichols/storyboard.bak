@@ -37,5 +37,10 @@ angular.module('app').config(function($locationProvider, $stateProvider, $urlRou
       url: '/profile/appearance',
       templateUrl: 'member/profile/appearance.html',
       controller: 'Appearance'
+    })
+    .state('dashboard', {
+      url: '/dashboard',
+      templateUrl: 'member/dashboard.html',
+      controller: 'Dashboard'
     });
 });

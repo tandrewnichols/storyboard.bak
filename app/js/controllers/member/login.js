@@ -6,7 +6,7 @@ angular.module('app').controller('Login', function($scope, Api) {
       Api.Member.get($scope.member, function(member) {
         if (member.uid) {
           $scope.$root.member = member;
-          $scope.state.go('home');
+          $scope.state.go('dashboard');
         }
       }, function(response) {
         $scope.error = response.data.error;

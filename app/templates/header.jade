@@ -19,6 +19,7 @@
           span &nbsp;&nbsp;{{ member.penname }}&nbsp;&nbsp;
           b.caret
         ul.dropdown-menu
+          li: a(href="#", ui-sref="dashboard") Dashboard
           li: a(href="#", ui-sref="profile.personal") Profile
       li
         a(href="#", ng-controller="Logout", ng-click="logout()")
