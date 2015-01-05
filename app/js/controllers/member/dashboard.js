@@ -1,3 +1,3 @@
-angular.module('app').controller('Dashboard', function($scope, Api) {
+angular.module('app').controller('Dashboard', function($scope) {
   
 });

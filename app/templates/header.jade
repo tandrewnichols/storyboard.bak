@@ -7,16 +7,16 @@
     a.navbar-brand(href="/") Storyboard
   .navbar-collapse.collapse.navbar-responsive-collapse
     ul.nav.navbar-nav
-      li.dropdown(ng-if="$root.isDev")
+      li.dropdown(ng-if="isDev")
         a.dropdown-toggle(href="#", data-toggle="dropdown")
           | Dev Tools&nbsp;
           b.caret
         ul.dropdown-menu
           li: a(href="#", data-toggle="modal", data-target="#dump-modal") Data Dump
-    ul.nav.navbar-nav.navbar-right(ng-show="$root.member")
+    ul.nav.navbar-nav.navbar-right(ng-show="author")
       li.dropdown
-        a.dropdown-toggle(href="#", data-toggle="dropdown", style="width:100%; background-image: url('{{ member.gravatar }}&s=32'); background-repeat:no-repeat; padding-left: 50px; background-position: 10px 50%; background-size: 32px;")
-          span &nbsp;&nbsp;{{ member.penname }}&nbsp;&nbsp;
+        a.dropdown-toggle(href="#", data-toggle="dropdown", style="width:100%; background-image: url('{{ author.gravatar }}&s=32'); background-repeat:no-repeat; padding-left: 50px; background-position: 10px 50%; background-size: 32px;")
+          span &nbsp;&nbsp;{{ author.penname }}&nbsp;&nbsp;
           b.caret
         ul.dropdown-menu
           li: a(href="#", ui-sref="dashboard") Dashboard
@@ -25,7 +25,7 @@
         a(href="#", ng-controller="Logout", ng-click="logout()")
           span.glyphicon.glyphicon-log-out
           span &nbsp;&nbsp;Logout
-    ul.nav.navbar-nav.navbar-right(ng-show="!$root.loadingMember && !$root.member")
+    ul.nav.navbar-nav.navbar-right(ng-show="!loadingAuthor && !author")
       li: a(href="#", ui-sref="join") Join
       li: a(href="#", ui-sref="login") Login
 div(ng-if="isDev", ng-include="'modals/dump.html'")

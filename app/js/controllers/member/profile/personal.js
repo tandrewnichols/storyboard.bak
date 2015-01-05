@@ -1,17 +1,17 @@
-angular.module('app').controller('Personal', function($scope, Api) {
+angular.module('app').controller('Personal', function($scope) {
   $scope.changePenname = function() {
     $scope.pennameForm.error = '';
     $scope.pennameForm.errorDismissed = false;
-    $scope.$root.member.penname = $scope.update.penname;
-    $scope.$root.member.$save();
+    $scope.author.penname = $scope.update.penname;
+    $scope.author.$save();
     $scope.update = {};
   };
 
   $scope.changeEmail = function() {
     $scope.emailForm.error = '';
     $scope.emailForm.errorDismissed = false;
-    Api.Member.update({ id: $scope.$root.member.uid, email: $scope.update.email }, function(member) {
-      $scope.$root.member.email = $scope.update.email;
+    Member.update({ id: $scope.author.uid, email: $scope.update.email }, function(member) {
+      $scope.author = member;
       $scope.update = {};
     }, function(response) {
       $scope.emailForm.error = _.safe(response, 'data.error', 'An error occurred while updating your email. Please try again later.');
@@ -43,8 +43,8 @@ angular.module('app').controller('Personal', function($scope, Api) {
   $scope.changePassword = function() {
     $scope.passwordForm.error = '';
     $scope.passwordForm.errorDismissed = '';
-    $scope.update.id = $scope.$root.member.uid;
-    Api.Member.update($scope.update, function(member) {
+    $scope.update.id = $scope.author.uid;
+    Member.update($scope.update, function(member) {
       $scope.update = {};
     }, function(response) {
       $scope.passwordForm.error = _.safe(response, 'data.error', 'An error occurred while updating your password. Please try again later.');

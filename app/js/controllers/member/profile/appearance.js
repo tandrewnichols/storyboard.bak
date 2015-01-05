@@ -1,7 +1,7 @@
-angular.module('app').controller('Appearance', function($scope, Api) {
+angular.module('app').controller('Appearance', function($scope) {
   $scope.submit = function(update) {
-    $scope.$root.member.theme = update.theme;
-    $scope.$root.member.inverse = update.inverse;
-    $scope.$root.member.$save();
+    $scope.author.theme = update.theme;
+    $scope.author.inverse = update.inverse;
+    $scope.author.$save();
   };
 });

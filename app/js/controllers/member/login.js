@@ -1,11 +1,11 @@
-angular.module('app').controller('Login', function($scope, Api) {
+angular.module('app').controller('Login', function($scope, Member) {
   $scope.submit = function() {
     $scope.error = null;
     $scope.dismissed = false;
     if (_.safe($scope, 'member.email') && _.safe($scope, 'member.password')) {
-      Api.Member.get($scope.member, function(member) {
+      Member.get($scope.member, function(member) {
         if (member.uid) {
-          $scope.$root.member = member;
+          $scope.author = member;
           $scope.state.go('dashboard');
         }
       }, function(response) {

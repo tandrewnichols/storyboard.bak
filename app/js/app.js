@@ -1,4 +1,4 @@
-angular.module('app', ['ngResource', 'ui.router', 'ngRoute', 'ngSanitize', 'ngAnimate', 'ui.bootstrap']).run(function($rootScope, $state) {
+angular.module('app', ['ngResource', 'ui.router', 'ngRoute', 'ngSanitize', 'ngAnimate', 'ui.bootstrap']).run(function($rootScope, $state, Member) {
   $rootScope.state = $state;
   _.mixin(_.string);
   _.mixin(_._safe);

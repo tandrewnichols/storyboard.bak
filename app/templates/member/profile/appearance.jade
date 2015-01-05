@@ -1,4 +1,4 @@
-.well(ng-if="$root.member", ng-init="update={ theme: $root.member.theme, inverse: $root.member.inverse }")
+.well(ng-if="author", ng-init="update={ theme: author.theme, inverse: author.inverse }")
   .row
     .col-xs-1(style="margin-top: 9px;") Theme
     .col-xs-11
@@ -21,7 +21,7 @@
         a.btn(ng-class="{ 'btn-primary': !update.inverse, 'btn-default': update.inverse }", ng-click="update.inverse = !update.inverse") Off
   .row.mtx
     .col-sm-offset-1.col-xs-2
-      button.btn.btn-primary.btn-block(ng-click="submit(update)", type="submit", ng-disabled="update.theme === $root.member.theme && update.inverse === $root.member.inverse") Submit
+      button.btn.btn-primary.btn-block(ng-click="submit(update)", type="submit", ng-disabled="update.theme === author.theme && update.inverse === author.inverse") Submit
   .row.mtl
     .col-xs-12
       em.text-muted * Changes will not take affect until you refresh the page.
