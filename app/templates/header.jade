@@ -20,9 +20,9 @@ nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !inverse, 'navbar-inve
           | &nbsp;&nbsp;Worlds&nbsp;&nbsp;
           b.caret
         ul.dropdown-menu
-          li: a(href="#", ui-sref="story") New World
+          li: a(href="#", ui-sref="world") New World
           li(ng-repeat="world in member.worlds")
-            a(href="#", ui-sref="story/{{ world.slug }}") {{ world.name }}
+            a(href="#", ui-sref="world({ slug: world.slug })") {{ world.name }}
       li.dropdown
         a.dropdown-toggle(href="#", data-toggle="dropdown")
           span.glyphicon.glyphicon-book
@@ -31,7 +31,7 @@ nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !inverse, 'navbar-inve
         ul.dropdown-menu
           li: a(href="#", ui-sref="story") New Story
           li(ng-repeat="story in member.stories")
-            a(href="#", ui-sref="story/{{ story.slug }}") {{ story.title }}
+            a(href="#", ui-sref="story({ slug: story.slug })") {{ story.title }}
       li.dropdown
         a.dropdown-toggle(href="#", data-toggle="dropdown", style="width:100%; background-image: url('{{ author.gravatar }}&s=32'); background-repeat:no-repeat; padding-left: 50px; background-position: 10px 50%; background-size: 32px;")
           span.ellipsis(style="max-width: 200px;", title="{{ author.penname }}") &nbsp;&nbsp;{{ author.penname }}&nbsp;&nbsp;

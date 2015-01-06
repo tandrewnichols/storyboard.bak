@@ -1,4 +1,4 @@
-div(ng-show="author.worlds")
+div(ng-show="author.worlds") You got some stuff
 div(ng-show="!author.worlds && !author.stories")
   div.jumbotron
     h1 Welcome to Storyboard
@@ -10,10 +10,32 @@ div(ng-show="!author.worlds && !author.stories")
         p  Or if your story is set in the real world and you don't need to do any world building, just jump right into your story.
     div.row
       div.col-xs-6
-        button.btn.btn-primary
+        button.btn.btn-primary(ng-click="newWorld = true", ng-show="!newWorld")
           span.glyphicon.glyphicon-globe
           | &nbsp;&nbsp;Create a world
+        form(name="newWorldForm", novalidate, ng-show="newWorld")
+          .form-group
+            label.control-label(for="name", style="font-weight: normal") Let's start with a name. You'll be able to add lots of other details later.
+            input.form-control#name(name="name", ng-model="world.name")
+          .form-group.btn-row
+            button.btn.btn-primary(type="button", ng-click="saveWorld()") Save
+            button.btn.btn-default(type="button", ng-click="newWorld = false") Cancel
+          .form-group(ng-show="newWorldForm.error && !newWorldForm.errorDismissed")
+            .alert.alert-danger.alert-dismissable
+              button.close(type="button", aria-hidden="true", ng-click="newWorldForm.errorDismissed = true") &times;
+              | {{ newWorldForm.error }}
       div.col-xs-6
-        button.btn.btn-primary
+        button.btn.btn-primary(ng-click="newStory = true", ng-show="!newStory")
           span.glyphicon.glyphicon-book
           | &nbsp;&nbsp;Start a story
+        form(name="newStoryForm", novalidate, ng-show="newStory")
+          .form-group
+            label.control-label(for="title", style="font-weight: normal") What's your story called? Don't worry, you can change this later.
+            input.form-control#title(name="title", ng-model="story.title")
+          .form-group.btn-row
+            button.btn.btn-primary(type="button", ng-click="saveStory()") Save
+            button.btn.btn-default(type="button", ng-click="newStory = false") Cancel
+          .form-group(ng-show="newStoryForm.error && !newStoryForm.errorDismissed")
+            .alert.alert-danger.alert-dismissable
+              button.close(type="button", aria-hidden="true", ng-click="newStoryForm.errorDismissed = true") &times;
+              | {{ newStoryForm.error }}

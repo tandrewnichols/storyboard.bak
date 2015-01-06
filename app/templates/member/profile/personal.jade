@@ -12,7 +12,7 @@
       .col-xs-10.col-sm-offset-1
         button.btn.btn-primary(type="submit", ng-click="changePenname()", ng-disabled="pennameForm.$invalid") Submit
   .alert.alert-danger.alert-dismissable.fade-out(ng-show="pennameForm.error && !pennameForm.errorDismissed")
-    button.close(type="button", ng-click="pennameForm.errorDismissed=true;", aria=hidden="true") &times;
+    button.close(type="button", ng-click="pennameForm.errorDismissed=true;", aria-hidden="true") &times;
     | {{ pennameForm.error }}
 .well
   h4.text-primary Change Email
