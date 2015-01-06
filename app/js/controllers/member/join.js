@@ -1,9 +1,9 @@
-angular.module('app').controller('Join', function($scope, Member) {
+angular.module('app').controller('Join', function($scope, Api) {
   $scope.submit = function() {
     $scope.error = null;
     $scope.dismissed = false;
     if (_.safe($scope, 'member.penname') && _.safe($scope, 'member.email') && _.safe($scope, 'member.password') && _.safe($scope, 'member.confirm')) {
-      Member.save($scope.member, function(member) {
+      Api.Member.save($scope.member, function(member) {
         if (member.uid) {
           $scope.$root.author = member; 
           $scope.state.go('dashboard');
@@ -16,7 +16,7 @@ angular.module('app').controller('Join', function($scope, Member) {
 
   $scope.checkEmail = function() {
     if ($scope.member && $scope.member.email) {
-      Member.get({ email: $scope.member.email }, function(member) {
+      Api.Member.get({ email: $scope.member.email }, function(member) {
         $scope.registerForm.penname.$error.taken = Boolean(member.uid);
       });
     }

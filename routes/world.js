@@ -1,4 +1,5 @@
 var router = module.exports = require('express').Router();
+var _ = require('lodash');
 
 // Create a new world
 router.post('/', function(req, res, next) {
@@ -11,4 +12,16 @@ router.post('/', function(req, res, next) {
       });
     }
   });
+});
+
+// Get ALL worlds associated with this user
+router.get('/', function(req, res, next) {
+  if (req.author) {
+    req.Graph.start().match('(n:Author)-[r:CREATED]->(w:World)').return('w').orderBy('w.createdTime').limit(5, function(err, nodes) {
+      if (err) res.sendError(err);
+      else res.status(200).json(_.pluck(nodes, 'data'));
+    });
+  } else {
+    res.status(404).end();
+  }
 });

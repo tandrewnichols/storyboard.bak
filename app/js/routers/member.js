@@ -26,8 +26,13 @@ angular.module('app').config(function($stateProvider) {
       controller: 'Appearance'
     })
     .state('dashboard', {
-      url: '/dashboard',
+      url: '/dashboard?foo',
       templateUrl: 'member/dashboard.html',
-      controller: 'Dashboard'
+      controller: 'Dashboard',
+      resolve: {
+        author: function(Api) { return Api.Member.get({}).$promise; },
+        worlds: function(Api) { return Api.World.query().$promise; },
+        stories: function(Api) { return Api.Story.query().$promise; }
+      }
     });
 });
