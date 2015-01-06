@@ -1,5 +1,5 @@
 angular.module('app').factory('Member', function($resource, $rootScope) {
-  var Member = $resource('/author/:id', { id: '@uid' }, { update: { method: 'PUT' } });
+  var Member = $resource('/api/author/:id', { id: '@uid' }, { update: { method: 'PUT' } });
 
   $rootScope.loadingAuthor = true;
   Member.get({}, function(member) {

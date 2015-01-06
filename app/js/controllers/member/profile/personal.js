@@ -14,7 +14,7 @@ angular.module('app').controller('Personal', function($scope, Member) {
       $scope.$root.author = member;
       $scope.update = {};
     }, function(response) {
-      $scope.emailForm.error = _.safe(response, 'data.error', 'An error occurred while updating your email. Please try again later.');
+      $scope.emailForm.error = _.safe(response, 'data.description', 'An error occurred while updating your email. Please try again later.');
     });
   };
 
@@ -47,7 +47,7 @@ angular.module('app').controller('Personal', function($scope, Member) {
     Member.update($scope.update, function(member) {
       $scope.update = {};
     }, function(response) {
-      $scope.passwordForm.error = _.safe(response, 'data.error', 'An error occurred while updating your password. Please try again later.');
+      $scope.passwordForm.error = _.safe(response, 'data.description', 'An error occurred while updating your password. Please try again later.');
     });
   };
 });

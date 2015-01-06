@@ -1,7 +1,12 @@
 module.exports = function(err, req, res, next) {
-  if (err instanceof Error) {
-    res.render('error', { description: err.message, stack: err.stack });
+  var data = {
+    description: err instanceof Error ? err.message : err,
+    stack: err instanceof Error ? err.stack : new Error().stack
+  };
+
+  if (req.isAjax) {
+    res.status(500).json(data);
   } else {
-    res.render('error', { description: err, stack: new Error().stack });
+    res.render('error', data);
   }
 };

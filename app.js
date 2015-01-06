@@ -29,12 +29,13 @@ app.use(middleware.locals);
 app.use(middleware.neo4j);
 app.use(middleware.extendRes);
 app.use(middleware.author);
+app.use('/api', middleware.ajax);
 
 // api
-app.dev.use('/db', routes.db);
-app.use('/author', routes.author);
-app.use('/world', routes.world);
-//app.use('/story', routes.story);
+app.dev.use('/api/db', routes.db);
+app.use('/api/author', routes.author);
+app.use('/api/world', routes.world);
+app.use('/api/story', routes.story);
 
 // routes
 app.use(routes.home);

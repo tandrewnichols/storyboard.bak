@@ -1,13 +1,9 @@
 module.exports = {
   instance: {
     fields: {
-      indexes: {
-        name: true
-      },
+      indexes: {},
       defaults: {},
-      unique: {
-        name: true
-      }
+      unique: {}
     }
   },
   static: {}

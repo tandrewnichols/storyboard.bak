@@ -13,6 +13,7 @@
             li(ng-repeat="label in labels")
               a(href="#", ng-click="$parent.selected=label") {{ label | titleize }}
         div.alert.alert-danger.mtl(ng-show="error") An error occurred: {{ error }}
+        div.alert.alert-success.mtl(ng-show="success") {{ success }}
       .modal-footer
         button.btn.btn-default(type="button", data-dismiss="modal") Close
-        button.btn.btn-danger(type="button", ng-click="dump()", modal-close="success") Dump
+        button.btn.btn-danger(type="button", ng-click="dump()") Dump

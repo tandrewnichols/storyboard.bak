@@ -5,11 +5,11 @@ angular.module('app').controller('Join', function($scope, Member) {
     if (_.safe($scope, 'member.penname') && _.safe($scope, 'member.email') && _.safe($scope, 'member.password') && _.safe($scope, 'member.confirm')) {
       Member.save($scope.member, function(member) {
         if (member.uid) {
-          $scope.author = member; 
+          $scope.$root.author = member; 
           $scope.state.go('dashboard');
         }
       }, function(response) {
-        $scope.error = response.data.error;
+        $scope.error = _.safe(response, 'data.description', 'An error occurred while creating your account. Please try again later.');
       }); 
     }
   };

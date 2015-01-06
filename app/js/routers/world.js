@@ -2,7 +2,7 @@ angular.module('app').config(function($stateProvider) {
   $stateProvider
     .state('world', {
       url: '/world/:slug',
-      templateUrl: 'world/create.html',
+      templateUrl: 'world/index.html',
       controller: 'World'
     });
 });
