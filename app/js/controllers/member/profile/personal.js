@@ -1,4 +1,4 @@
-angular.module('app').controller('Personal', function($scope) {
+angular.module('app').controller('Personal', function($scope, Member) {
   $scope.changePenname = function() {
     $scope.pennameForm.error = '';
     $scope.pennameForm.errorDismissed = false;
@@ -10,8 +10,8 @@ angular.module('app').controller('Personal', function($scope) {
   $scope.changeEmail = function() {
     $scope.emailForm.error = '';
     $scope.emailForm.errorDismissed = false;
-    Member.update({ id: $scope.author.uid, email: $scope.update.email }, function(member) {
-      $scope.author = member;
+    Member.update({ uid: $scope.author.uid, email: $scope.update.email }, function(member) {
+      $scope.$root.author = member;
       $scope.update = {};
     }, function(response) {
       $scope.emailForm.error = _.safe(response, 'data.error', 'An error occurred while updating your email. Please try again later.');
@@ -43,7 +43,7 @@ angular.module('app').controller('Personal', function($scope) {
   $scope.changePassword = function() {
     $scope.passwordForm.error = '';
     $scope.passwordForm.errorDismissed = '';
-    $scope.update.id = $scope.author.uid;
+    $scope.update.uid = $scope.author.uid;
     Member.update($scope.update, function(member) {
       $scope.update = {};
     }, function(response) {

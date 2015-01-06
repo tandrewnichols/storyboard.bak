@@ -1,9 +1,56 @@
 var uuid = require('uuid');
-var gravatar = 'http://www.gravatar.com/avatar/%s?d=mm';
 var crypto = require('crypto');
 var util = require('util');
 var _ = require('lodash');
-var crypt = require('../lib/crypt');
+var nconf = require('nconf');
+
+var gravatar = function(node) {
+  var md5 = crypto.createHash('md5');
+  if (typeof node === 'object') {
+    md5.update(node.data.email);
+  } else if (typeof node === 'string') {
+    md5.update(node);
+  }
+  return util.format('http://www.gravatar.com/avatar/%s?d=mm', md5.digest('hex'));
+};
+
+var compare = function(orig, cmp) {
+  var sentinel;
+  if (orig.length !== cmp.length) return false;
+  for (var i = 0; i <= (orig.length - 1); i++) {
+    sentinel |= orig.charCodeAt(i) ^ cmp.charCodeAt(i);
+  }
+  return sentinel === 0;
+};
+
+var encrypt = function(text) {
+  var iv = new Buffer(crypto.randomBytes(16));
+  var cipher = crypto.createCipheriv('AES-256-CBC', new Buffer(nconf.get('cipherKey')), iv);
+  cipher.setEncoding('hex');
+  cipher.write(text);
+  cipher.end();
+  var cipherText = cipher.read();
+  var hmac = crypto.createHmac('SHA256', nconf.get('hmacKey'));
+  hmac.update(cipherText);
+  hmac.update(iv.toString('hex'));
+  return [cipherText, iv.toString('hex'), hmac.digest('hex')].join('$');
+};
+
+var decrypt = function(cipher) {
+  var cipherBlob = cipher.split('$');
+  var cipherText = cipherBlob[0];
+  var iv = new Buffer(cipherBlob[1], 'hex');
+  var hmacDigest = cipherBlob[2];
+  var hmac = crypto.createHmac('SHA256', nconf.get('hmacKey'));
+  hmac.update(cipherText);
+  hmac.update(iv.toString('hex'));
+  if (!compare(hmacDigest, hmac.digest('hex'))) return null; 
+  else {
+    var decipher = crypto.createDecipheriv('AES-256-CBC', new Buffer(nconf.get('cipherKey')), iv);
+    var decrypted = decipher.update(cipherText, 'hex', 'utf8');
+    return decrypted + decipher.final('utf8');
+  }
+};
 
 module.exports = {
   instance: {
@@ -19,11 +66,7 @@ module.exports = {
         theme: 'spacelab',
         inverse: true,
         uid: uuid.v4,
-        gravatar: function(node) {
-          var md5 = crypto.createHash('md5');
-          md5.update(node.data.email);
-          return util.format(gravatar, md5.digest('hex'));
-        }
+        gravatar: gravatar
       },
       unique: {
         email: true,
@@ -34,14 +77,17 @@ module.exports = {
       return _.omit(this.data, 'password');
     },
     encrypt: function() {
-      return crypt.encrypt(this.data.uid);
+      return encrypt(this.data.uid);
     },
     decrypt: function() {
-      return crypt.decrypt(this.data.uid);
+      return decrypt(this.data.uid);
     }
   },
   static: {
-    encrypt: crypt.encrypt,
-    decrypt: crypt.decrypt
+    encrypt: encrypt,
+    decrypt: decrypt,
+    changeEmail: function(uid, email, cb) {
+      return this.get(uid).update({ email: email, gravatar: gravatar(email) }, cb);
+    }
   }
 };
