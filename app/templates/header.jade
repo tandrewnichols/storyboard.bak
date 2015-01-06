@@ -21,7 +21,7 @@ nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !inverse, 'navbar-inve
           b.caret
         ul.dropdown-menu
           li: a(href="#", ui-sref="world") New World
-          li(ng-repeat="world in member.worlds")
+          li(ng-repeat="world in author.worlds")
             a(href="#", ui-sref="world({ slug: world.slug })") {{ world.name }}
       li.dropdown
         a.dropdown-toggle(href="#", data-toggle="dropdown")
@@ -30,7 +30,7 @@ nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !inverse, 'navbar-inve
           b.caret
         ul.dropdown-menu
           li: a(href="#", ui-sref="story") New Story
-          li(ng-repeat="story in member.stories")
+          li(ng-repeat="story in author.stories")
             a(href="#", ui-sref="story({ slug: story.slug })") {{ story.title }}
       li.dropdown
         a.dropdown-toggle(href="#", data-toggle="dropdown", style="width:100%; background-image: url('{{ author.gravatar }}&s=32'); background-repeat:no-repeat; padding-left: 50px; background-position: 10px 50%; background-size: 32px;")

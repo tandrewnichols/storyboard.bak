@@ -10,15 +10,14 @@ var neoResponseCallback = function(res, err, author) {
 };
 
 var cookie = function(res, author) {
-  res.cookie('member', author.encrypt(), { path: '/', maxAge: oneYear });
+  res.cookie('author', author.encrypt(), { path: '/', maxAge: oneYear });
   res.status(200).json(author.get());
 };
 
 router.post('/:id', function(req, res, next) {
-  var loggedInId = req.models.Author.decrypt(req.cookies.member);
-  if (loggedInId !== req.params.id) res.status(403).end();
+  if (req.author.uid !== req.params.id) res.status(403).end();
   else {
-    req.models.Author.get(req.params.id).update(_.omit(req.body, 'id'), neoResponseCallback.bind(null, res));
+    req.author.update(_.omit(req.body, 'id'), neoResponseCallback.bind(null, res));
   }
 }); 
 
@@ -46,53 +45,50 @@ router.get('/', function(req, res, next) {
       if (err) {
         res.sendError(err);
       } else {
+        // Member logging in
         if (req.query.password && author) {
           bcrypt.compare(req.query.password, author.data.password, function(err, match) {
             if (err) res.sendError(err);
             else if (!match) res.sendError('Invalid pen name or password.');
             else cookie(res, author, author);
           });
+        // Member trying to join but email already exists
         } else if (author) {
+          // TODO: 403 here?
           res.status(200).json(author.get());
         } else {
           res.status(404).end();
         }
       }
     });
-  } else if (req.cookies.member) {
-    req.models.Author.get(req.models.Author.decrypt(req.cookies.member), neoResponseCallback.bind(null, res));
+  } else if (req.cookies.author) {
+    neoResponseCallback(res, null, req.author);
   } else {
     res.status(404).end();
   }
 });
 
 router.put('/:id', function(req, res, next) {
-  var loggedInId = req.models.Author.decrypt(req.cookies.member);
-  if (loggedInId !== req.params.id) res.status(403).end();
+  if (req.author.uid !== req.params.id) res.status(403).end();
   else if (req.body.email) {
     req.models.Author.findOne({ email: req.body.email }, function(err, author) {
       if (err) res.sendError(err);
       else if (author) res.status(400).json({ error: 'That email is already registered.' });
       else {
-        req.models.Author.changeEmail(req.params.id, req.body.email, neoResponseCallback.bind(null, res));
+        req.author.changeEmail(req.body.email, neoResponseCallback.bind(null, res));
       }
     });
-  } else if (req.body.oldPw) {
-    req.models.Author.get(req.params.id, function(err, author) {
+  } else if (req.body.oldPw && req.author) {
+    bcrypt.compare(req.body.oldPw, req.author.data.password, function(err, match) {
       if (err) res.sendError(err);
-      else if (author) {
-        bcrypt.compare(req.body.oldPw, author.data.password, function(err, match) {
-          if (err) res.sendError(err);
-          else if (!match) res.sendError('Invalid password.');
-          else if (req.body.newPw === req.body.confirm) {
-            bcrypt.hash(req.body.newPw, 10, function(err, hash) {
-              author.update({ password: hash }, neoResponseCallback.bind(null, res));
-            });
-          } else res.sendError('The new passwords do not match.');
+      else if (!match) res.sendError('Invalid password.');
+      else if (req.body.newPw === req.body.confirm) {
+        bcrypt.hash(req.body.newPw, 10, function(err, hash) {
+          author.update({ password: hash }, neoResponseCallback.bind(null, res));
         });
-      }
+      } else res.sendError('The new passwords do not match.');
     });
   } else {
-    req.models.Author.get(req.params.id).update(_.omit(req.body, 'id'), neoResponseCallback.bind(null, res));
+    req.author.update(_.omit(req.body, 'id'), neoResponseCallback.bind(null, res));
   }
 });

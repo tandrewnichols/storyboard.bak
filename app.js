@@ -28,10 +28,13 @@ app.use('/assets', express.static(__dirname + '/' + nconf.get('staticFilePath'))
 app.use(middleware.locals);
 app.use(middleware.neo4j);
 app.use(middleware.extendRes);
+app.use(middleware.author);
 
 // api
 app.dev.use('/db', routes.db);
-app.use('/member', routes.member);
+app.use('/author', routes.author);
+app.use('/world', routes.world);
+//app.use('/story', routes.story);
 
 // routes
 app.use(routes.home);

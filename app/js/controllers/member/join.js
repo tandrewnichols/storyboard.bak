@@ -15,7 +15,7 @@ angular.module('app').controller('Join', function($scope, Member) {
   };
 
   $scope.checkEmail = function() {
-    if ($scope.member && $scope.member.penname) {
+    if ($scope.member && $scope.member.email) {
       Member.get({ email: $scope.member.email }, function(member) {
         $scope.registerForm.penname.$error.taken = Boolean(member.uid);
       });

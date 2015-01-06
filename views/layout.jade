@@ -3,10 +3,10 @@ html(lang="en",ng-app="app")
   head
     title Storyboard
     meta(name="description", content="Online story manager")
-    link(rel="stylesheet", href="/assets/css/app.#{ member ? member.theme : 'spacelab' }.css")
+    link(rel="stylesheet", href="/assets/css/app.#{ author ? author.theme : 'spacelab' }.css")
     base(href="/")
   body(ng-init="isDev=#{isDev}")
-    div(ng-include="'header.html'", ng-controller="Header", ng-init="inverse=#{ member ? member.inverse : true }")
+    div(ng-include="'header.html'", ng-controller="Header", ng-init="inverse=#{ author ? author.inverse : true }")
     div(class="content" class={container: !pageComponents.hideWrapper})
       block content
     script(src="/assets/js/app.js")

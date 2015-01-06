@@ -1,7 +1,7 @@
 angular.module('app').controller('Logout', function($scope, $rootScope, $state) {
   $scope.logout = function() {
-    $.removeCookie('member', { path: '/' });
-    delete $rootScope.member;
+    $.removeCookie('author', { path: '/' });
+    delete $rootScope.author;
     $state.go('home');
   };
 });

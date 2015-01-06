@@ -1,4 +1,3 @@
-var uuid = require('uuid');
 var crypto = require('crypto');
 var util = require('util');
 var _ = require('lodash');
@@ -56,21 +55,15 @@ module.exports = {
   instance: {
     fields: {
       indexes: {
-        email: true,
-        uid: true
+        email: true
       },
       defaults: {
-        createdTime: function() {
-          return Date.now();
-        },
         theme: 'spacelab',
         inverse: true,
-        uid: uuid.v4,
         gravatar: gravatar
       },
       unique: {
-        email: true,
-        uid: true
+        email: true
       }
     },
     get: function() {
@@ -81,6 +74,9 @@ module.exports = {
     },
     decrypt: function() {
       return decrypt(this.data.uid);
+    },
+    changeEmail: function(email, cb) {
+      return this.update({ email: email, gravatar: gravatar(email) }, cb);
     }
   },
   static: {
