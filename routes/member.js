@@ -17,7 +17,10 @@ var cookie = function(res, author) {
 router.post('/:id', function(req, res, next) {
   var loggedInId = req.models.Author.decrypt(req.cookies.member);
   if (loggedInId !== req.params.id) res.status(403).end();
-  else req.models.Author.findOne({ uid: req.params.id }).update(_.omit(req.body, 'id'), neoResponseCallback.bind(null, res));
+  else {
+    console.log(req.params.id, req.body);
+    req.models.Author.get(req.params.id).update(_.omit(req.body, 'id'), neoResponseCallback.bind(null, res));
+  }
 }); 
 
 router.post('/', function(req, res, next) {
@@ -58,7 +61,7 @@ router.get('/', function(req, res, next) {
       }
     });
   } else if (req.cookies.member) {
-    req.models.Author.findOne({ uid: req.models.Author.decrypt(req.cookies.member) }, neoResponseCallback.bind(null, res));
+    req.models.Author.get(req.models.Author.decrypt(req.cookies.member), neoResponseCallback.bind(null, res));
   } else {
     res.status(404).end();
   }
@@ -72,11 +75,11 @@ router.put('/:id', function(req, res, next) {
       if (err) res.sendError(err);
       else if (author) res.status(400).json({ error: 'That email is already registered.' });
       else {
-        req.models.Author.findOne({ uid: req.params.id }).update({ email: req.body.email }, neoResponseCallback.bind(null, res));
+        req.models.Author.get(req.params.id).update({ email: req.body.email }, neoResponseCallback.bind(null, res));
       }
     });
   } else if (req.body.oldPw) {
-    req.models.Author.findOne({ uid: req.params.id }, function(err, author) {
+    req.models.Author.get(req.params.id, function(err, author) {
       if (err) res.sendError(err);
       else if (author) {
         bcrypt.compare(req.body.oldPw, author.password, function(err, match) {
@@ -91,6 +94,6 @@ router.put('/:id', function(req, res, next) {
       }
     });
   } else {
-    req.models.Author.findOne({ uid: req.params.id }).update(_.omit(req.body, 'id'), neoResponseCallback.bind(null, res));
+    req.models.Author.get(req.params.id).update(_.omit(req.body, 'id'), neoResponseCallback.bind(null, res));
   }
 });

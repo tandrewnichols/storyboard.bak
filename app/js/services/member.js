@@ -8,7 +8,6 @@ angular.module('app').factory('Member', function($resource, $rootScope) {
       $rootScope.loadingAuthor = false;
     }
   }, function(err) {
-    console.log('got error:', err);
     $rootScope.loadingAuthor = false;
   });
   
