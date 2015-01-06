@@ -1,1 +1,19 @@
-div Dashboard
+div(ng-show="author.worlds")
+div(ng-show="!author.worlds && !author.stories")
+  div.jumbotron
+    h1 Welcome to Storyboard
+    hr
+    div.row
+      div.col-xs-6
+        p It looks like you haven't created any worlds yet. Let's get started on that now!
+      div.col-xs-6
+        p  Or if your story is set in the real world and you don't need to do any world building, just jump right into your story.
+    div.row
+      div.col-xs-6
+        button.btn.btn-primary
+          span.glyphicon.glyphicon-globe
+          | &nbsp;&nbsp;Create a world
+      div.col-xs-6
+        button.btn.btn-primary
+          span.glyphicon.glyphicon-book
+          | &nbsp;&nbsp;Start a story
