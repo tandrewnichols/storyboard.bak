@@ -23,7 +23,13 @@ router.post('/', function(req, res, next) {
 
       req.Node.createRelations(rels, function(err, rels) {
         if (err) res.sendError(err);
-        else res.status(200).json(story.data);
+        else {
+          // Wrap this into a .createUniqueRelationship function on Node (or instance)
+          req.Graph.start().match('(a:Author { uid: {author} }),(w:World { uid: {world} }').createUnique('(a)-[r:CREATED]->(w)').return('r', function(err, rel) {
+            if (err) res.sendError(err);
+            else res.status(200).json(story.data);
+          });
+        }
       });
     }
   });
