@@ -17,11 +17,13 @@ router.post('/', function(req, res, next) {
         { to: story, from: req.author, type: 'CREATED' },
         { to: story, from: world, type: 'HAS' }
       ];
+
+      // TODO: Figure out how to know whether to add this relationship
       if (req.body.world) rels.push({ to: world, from: req.author, type: 'CREATED' });
 
       req.Node.createRelations(rels, function(err, rels) {
         if (err) res.sendError(err);
-        else res.status(200).json({ story: story.data, world: world.data, rels: _.pluck(rels.data) });
+        else res.status(200).json(story.data);
       });
     }
   });
