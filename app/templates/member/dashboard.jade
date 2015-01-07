@@ -1,5 +1,7 @@
-div(ng-show="author.worlds") You got some stuff
-div(ng-show="!author.worlds && !author.stories")
+div(ng-show="author.worlds.length")
+  ul
+    li(ng-repeat="world in author.worlds") {{ world.name }}
+div(ng-show="!author.worlds.length && !author.stories.length")
   div.jumbotron
     h1 Welcome to Storyboard
     hr
