@@ -3,6 +3,7 @@ var bcrypt = require('bcrypt');
 var _ = require('lodash');
 var oneYear = 365*24*60*60*1000
 var crypto = require('crypto');
+var requireMember = require('../lib/middleware/requireMember');
 
 var neoResponseCallback = function(res, err, author) {
   if (err) res.sendError(err);
@@ -14,7 +15,7 @@ var cookie = function(res, author) {
   res.status(200).json(author.get());
 };
 
-router.post('/:id', function(req, res, next) {
+router.post('/:id', requireMember, function(req, res, next) {
   if (req.author.uid !== req.params.id) res.status(403).end();
   else {
     req.author.update(_.omit(req.body, 'id'), neoResponseCallback.bind(null, res));
@@ -57,18 +58,18 @@ router.get('/', function(req, res, next) {
           // TODO: 403 here?
           res.status(200).json(author.get());
         } else {
-          res.status(404).end();
+          res.status(200).end();
         }
       }
     });
   } else if (req.cookies.author) {
     neoResponseCallback(res, null, req.author);
   } else {
-    res.status(404).end();
+    res.status(200).end();
   }
 });
 
-router.put('/:id', function(req, res, next) {
+router.put('/:id', requireMember, function(req, res, next) {
   if (req.author.uid !== req.params.id) res.status(403).end();
   else if (req.body.email) {
     req.models.Author.findOne({ email: req.body.email }, function(err, author) {

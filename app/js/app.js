@@ -7,13 +7,13 @@ angular.module('app', ['ngResource', 'ui.router', 'ngRoute', 'ngSanitize', 'ngAn
   };
 
   $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
-    if (error.config.method === 'GET' && error.config.url === '/api/author' && error.status === 404) {
+    if (error.config.method === 'GET' && error.config.url === '/api/author' && error.status === 404 && toState.access === 'member') {
       Redirect.to = {
         state: toState,
         params: toParams
       };
-      Redirect.waitFor = 'login';
-      $state.go('login');
+      Redirect.waitFor = 'main.login';
+      $state.go('main.login');
     }
   });
 

@@ -1,6 +1,6 @@
 angular.module('app').config(function($stateProvider) {
   $stateProvider
-    .state('world', {
+    .state('main.world', {
       url: '/world/:slug',
       templateUrl: 'world/index.html',
       controller: 'World'

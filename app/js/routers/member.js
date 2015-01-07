@@ -1,38 +1,36 @@
 angular.module('app').config(function($stateProvider) {
   $stateProvider
-    .state('join', {
+    .state('main.join', {
       url: '/join',
       templateUrl: 'member/join.html',
       controller: 'Join'
     })
-    .state('login', {
-      url: '/login',
+    .state('main.login', {
+      url: '/login?state&params',
       templateUrl: 'member/login.html',
       controller: 'Login'
     })
-    .state('profile', {
+    .state('main.profile', {
       url: '/profile',
       abstract: true,
-      templateUrl: 'member/profile/index.html'
+      templateUrl: 'member/profile/index.html',
+      controller: 'Profile',
+      access: 'member'
     })
-    .state('profile.personal', {
+    .state('main.profile.personal', {
       url: '/profile/personal',
       templateUrl: 'member/profile/personal.html',
       controller: 'Personal'
     })
-    .state('profile.appearance', {
+    .state('main.profile.appearance', {
       url: '/profile/appearance',
       templateUrl: 'member/profile/appearance.html',
       controller: 'Appearance'
     })
-    .state('dashboard', {
-      url: '/dashboard?foo',
+    .state('main.dashboard', {
+      url: '/dashboard',
       templateUrl: 'member/dashboard.html',
       controller: 'Dashboard',
-      resolve: {
-        author: function(Api) { return Api.Member.get({}).$promise; },
-        worlds: function(Api) { return Api.World.query().$promise; },
-        stories: function(Api) { return Api.Story.query().$promise; }
-      }
+      access: 'member'
     });
 });

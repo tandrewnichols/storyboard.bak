@@ -6,7 +6,5 @@ html(lang="en",ng-app="app")
     link(rel="stylesheet", href="/assets/css/app.#{ author ? author.theme : 'spacelab' }.css")
     base(href="/")
   body(ng-init="isDev=#{isDev}")
-    div(ng-include="'header.html'", ng-controller="Header", ng-init="inverse=#{ author ? author.inverse : true }")
-    div(class="content" class={container: !pageComponents.hideWrapper})
-      block content
+    block content
     script(src="/assets/js/app.js")

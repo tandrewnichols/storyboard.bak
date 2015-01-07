@@ -77,6 +77,18 @@ module.exports = {
     },
     changeEmail: function(email, cb) {
       return this.update({ email: email, gravatar: gravatar(email) }, cb);
+    },
+    getAll: function(type, limit, cb) {
+      if (typeof limit === 'function') {
+        cb = limit;
+        limit = 5;
+      }
+      var query = this.Graph.start().match('(a:Author)-[:CREATED]->(n:' + type + ')').where({ 'a.uid': this.data.uid }).return('n').orderBy('n.createdDate')
+      if (limit) { 
+        query.limit(limit, cb);
+      } else {
+        query.exec(cb);
+      }
     }
   },
   static: {

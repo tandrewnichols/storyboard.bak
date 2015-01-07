@@ -1,4 +1,4 @@
-nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !inverse, 'navbar-inverse': inverse }", style="padding-right: 20px;")
+nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !author.inverse, 'navbar-inverse': author.inverse }", style="padding-right: 20px;")
   .navbar-header
     button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-responsive-collapse")
       span.icon-bar
@@ -20,36 +20,46 @@ nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !inverse, 'navbar-inve
           | &nbsp;&nbsp;Worlds&nbsp;&nbsp;
           b.caret
         ul.dropdown-menu
-          li: a(href="#", ui-sref="world") New World
+          li
+            a(href="#", ui-sref="main.world")
+              span.glyphicon.glyphicon-plus-sign
+              | &nbsp;&nbsp;New World&nbsp;&nbsp;
           li(ng-repeat="world in author.worlds")
-            a(href="#", ui-sref="world({ slug: world.slug })") {{ world.name }}
+            a(href="#", ui-sref="main.world({ slug: world.slug })")
+              span.glyphicon.glyphicon-globe
+              | &nbsp;&nbsp;{{ world.name }}&nbsp;&nbsp;
       li.dropdown
         a.dropdown-toggle(href="#", data-toggle="dropdown")
           span.glyphicon.glyphicon-book
           | &nbsp;&nbsp;Stories&nbsp;&nbsp;
           b.caret
         ul.dropdown-menu
-          li: a(href="#", ui-sref="story") New Story
+          li
+            a(href="#", ui-sref="main.story")
+              span.glyphicon.glyphicon-plus-sign
+              | &nbsp;&nbsp;New Story&nbsp&nbsp;
           li(ng-repeat="story in author.stories")
-            a(href="#", ui-sref="story({ slug: story.slug })") {{ story.title }}
+            a(href="#", ui-sref="main.story({ slug: story.slug })")
+              span.glyphicon.glyphicon-book
+              | &nbsp;&nbsp;{{ story.title }}&nbsp;&nbsp;
       li.dropdown
         a.dropdown-toggle(href="#", data-toggle="dropdown", style="width:100%; background-image: url('{{ author.gravatar }}&s=32'); background-repeat:no-repeat; padding-left: 50px; background-position: 10px 50%; background-size: 32px;")
           span.ellipsis(style="max-width: 200px;", title="{{ author.penname }}") &nbsp;&nbsp;{{ author.penname }}&nbsp;&nbsp;
           b.caret
         ul.dropdown-menu
           li
-            a(href="#", ui-sref="dashboard")
+            a(href="#", ui-sref="main.dashboard")
               span.glyphicon.glyphicon-home
               | &nbsp;&nbsp;Dashboard
           li
-            a(href="#", ui-sref="profile.personal")
+            a(href="#", ui-sref="main.profile.personal")
               span.glyphicon.glyphicon-user
               | &nbsp;&nbsp;Profile
           li
             a(href="#", ng-controller="Logout", ng-click="logout()")
               span.glyphicon.glyphicon-log-out
               | &nbsp;&nbsp;Logout
-    ul.nav.navbar-nav.navbar-right(ng-show="!loadingAuthor && !author")
-      li: a(href="#", ui-sref="join") Join
-      li: a(href="#", ui-sref="login") Login
+    ul.nav.navbar-nav.navbar-right(ng-show="!author")
+      li: a(href="#", ui-sref="main.join") Join
+      li: a(href="#", ui-sref="main.login") Login
 div(ng-if="isDev", ng-include="'modals/dump.html'")
