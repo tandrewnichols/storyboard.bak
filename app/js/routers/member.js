@@ -6,7 +6,7 @@ angular.module('app').config(function($stateProvider) {
       controller: 'Join'
     })
     .state('main.login', {
-      url: '/login?state&params',
+      url: '/login',
       templateUrl: 'member/login.html',
       controller: 'Login'
     })

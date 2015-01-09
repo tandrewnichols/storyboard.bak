@@ -1,3 +1,3 @@
 div(ng-include="'header.html'")
-div.content.container
+div.content(ng-class="{ container: !$root.hideContainer, 'container-fluid': $root.hideContainer }")
   div#bodyContent(ui-view="")
