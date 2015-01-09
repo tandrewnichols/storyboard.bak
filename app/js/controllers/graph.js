@@ -1,19 +1,18 @@
 angular.module('app').controller('Graph', function($scope, $http) {
   $scope.labels = ['All'];
   $scope.getLabels = function() {
-    $http.get('/api/db/query/labels').then(function(result) {
+    $http.get('/api/admin/labels').then(function(result) {
       $scope.labels = $scope.labels.concat(result.data);
-    }, function() {
-      // TODO: handle error
+    }, function(response) {
+      $scope.error = error.data.description.message;
     });
   };
 
   $scope.dump = function() {
-    $http.get('/api/db/dump' + (!$scope.selected || $scope.selected === 'All' ? '' : '/' + $scope.selected.toLowerCase())).then(function(result) {
-      console.log(result);
-      $scope.success = 'Successfully deleted all' + ($scope.selected === 'All' ? '' : ' ' + $scope.selected) + ' nodes.';
+    $http['delete']('/api/admin/nodes' + (!$scope.selected || $scope.selected === 'All' ? '' : '/' + $scope.selected)).then(function(result) {
+      $scope.success = 'Successfully deleted all ' + $scope.selected + ' nodes.';
     }, function(error) {
-      $scope.error = error.data;
+      $scope.error = error.data.description.message;
     });
   };
 });

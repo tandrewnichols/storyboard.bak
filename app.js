@@ -32,7 +32,7 @@ app.use(middleware.author);
 app.use('/api', middleware.ajax);
 
 // api
-app.dev.use('/api/db', middleware.requireMember, routes.db);
+app.dev.use('/api/admin', middleware.requireMember, routes.admin);
 app.use('/api/author', routes.author);
 app.use('/api/world', middleware.requireMember, routes.world);
 app.use('/api/story', middleware.requireMember, routes.story);
