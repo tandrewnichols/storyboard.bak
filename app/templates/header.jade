@@ -21,11 +21,11 @@ nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !author.inverse, 'navb
           b.caret
         ul.dropdown-menu
           li
-            a(href="#", ui-sref="main.world")
+            a(href="#", ui-sref="world")
               span.glyphicon.glyphicon-plus-sign
               | &nbsp;&nbsp;New World&nbsp;&nbsp;
           li(ng-repeat="world in author.worlds")
-            a(href="#", ui-sref="main.world({ slug: world.slug })")
+            a(href="#", ui-sref="world({ slug: world.slug })")
               span.glyphicon.glyphicon-globe
               | &nbsp;&nbsp;{{ world.name }}&nbsp;&nbsp;
       li.dropdown
@@ -35,11 +35,11 @@ nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !author.inverse, 'navb
           b.caret
         ul.dropdown-menu
           li
-            a(href="#", ui-sref="main.story")
+            a(href="#", ui-sref="story")
               span.glyphicon.glyphicon-plus-sign
               | &nbsp;&nbsp;New Story&nbsp&nbsp;
           li(ng-repeat="story in author.stories")
-            a(href="#", ui-sref="main.story({ slug: story.slug })")
+            a(href="#", ui-sref="story({ slug: story.slug })")
               span.glyphicon.glyphicon-book
               | &nbsp;&nbsp;{{ story.title }}&nbsp;&nbsp;
       li.dropdown
@@ -48,11 +48,11 @@ nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !author.inverse, 'navb
           b.caret
         ul.dropdown-menu
           li
-            a(href="#", ui-sref="main.dashboard")
+            a(href="#", ui-sref="dashboard")
               span.glyphicon.glyphicon-home
               | &nbsp;&nbsp;Dashboard
           li
-            a(href="#", ui-sref="main.profile.personal")
+            a(href="#", ui-sref="profile.personal")
               span.glyphicon.glyphicon-user
               | &nbsp;&nbsp;Profile
           li
@@ -60,6 +60,6 @@ nav.navbar.navbar-fixed-top(ng-class="{ 'navbar-default': !author.inverse, 'navb
               span.glyphicon.glyphicon-log-out
               | &nbsp;&nbsp;Logout
     ul.nav.navbar-nav.navbar-right(ng-show="!author")
-      li: a(href="#", ui-sref="main.join") Join
-      li: a(href="#", ui-sref="main.login") Login
+      li: a(href="#", ui-sref="join") Join
+      li: a(href="#", ui-sref="login") Login
 div(ng-if="isDev", ng-include="'modals/dump.html'")

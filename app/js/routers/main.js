@@ -8,18 +8,7 @@ angular.module('app').config(function($locationProvider, $stateProvider, $urlRou
     //}
   //});
   $stateProvider
-    .state('main', {
-      url: '',
-      templateUrl: 'index.html',
-      controller: 'Header',
-      abstract: true,
-      resolve: {
-        author: function(Api) { return Api.Member.get({}).$promise; },
-        worlds: function(Api) { return Api.World.query().$promise; },
-        stories: function(Api) { return Api.Story.query().$promise; }
-      }
-    })
-    .state('main.home', {
+    .state('home', {
       url: '/',
       templateUrl: 'home.html',
       controller: 'Home'

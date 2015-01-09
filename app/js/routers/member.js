@@ -1,33 +1,33 @@
 angular.module('app').config(function($stateProvider) {
   $stateProvider
-    .state('main.join', {
+    .state('join', {
       url: '/join',
       templateUrl: 'member/join.html',
       controller: 'Join'
     })
-    .state('main.login', {
+    .state('login', {
       url: '/login',
       templateUrl: 'member/login.html',
       controller: 'Login'
     })
-    .state('main.profile', {
+    .state('profile', {
       url: '/profile',
       abstract: true,
       templateUrl: 'member/profile/index.html',
       controller: 'Profile',
       access: 'member'
     })
-    .state('main.profile.personal', {
+    .state('profile.personal', {
       url: '/profile/personal',
       templateUrl: 'member/profile/personal.html',
       controller: 'Personal'
     })
-    .state('main.profile.appearance', {
+    .state('profile.appearance', {
       url: '/profile/appearance',
       templateUrl: 'member/profile/appearance.html',
       controller: 'Appearance'
     })
-    .state('main.dashboard', {
+    .state('dashboard', {
       url: '/dashboard',
       templateUrl: 'member/dashboard.html',
       controller: 'Dashboard',

@@ -20,7 +20,8 @@ module.exports = {
       'bower_components/angular-lodash/angular-lodash.js',
       'vendor/js/**/*.js',
       'app/js/app.js',
-      'app/js/**/*.js'
+      'app/js/**/*.js',
+      '!app/js/bootstrap.js'
     ]
   },
   paths: {

@@ -1,10 +1,25 @@
 doctype html
-html(lang="en",ng-app="app")
+html(lang="en")
   head
     title Storyboard
     meta(name="description", content="Online story manager")
     link(rel="stylesheet", href="/assets/css/app.#{ author ? author.theme : 'spacelab' }.css")
+    script.
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            window.author = JSON.parse(xhr.responseText);
+          } else {
+            window.authorError = err;
+          }
+        }
+      };
+      xhr.open('GET', '/api/author?full=1')
+      xhr.send();
     base(href="/")
   body(ng-init="isDev=#{isDev}")
-    block content
+    div(ng-include="'header.html'", ng-controller="Header")
+    .content(ng-class="{ container: !$root.hideContainer, 'container-fluid': $root.hideContainer }")
+      block content
     script(src="/assets/js/app.js")

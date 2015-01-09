@@ -12,8 +12,8 @@ angular.module('app', ['ngResource', 'ui.router', 'ngRoute', 'ngSanitize', 'ngAn
         //state: toState,
         //params: toParams
       //};
-      //Redirect.waitFor = 'main.login';
-      //$state.go('main.login');
+      //Redirect.waitFor = 'login';
+      //$state.go('login');
     //}
   //});
 
@@ -25,19 +25,19 @@ angular.module('app', ['ngResource', 'ui.router', 'ngRoute', 'ngSanitize', 'ngAn
     //}
   //});
 
-  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-    if (toState.access === 'member' && !$rootScope.author) {
-      Redirect.to = {
-        state: toState,
-        params: fromParams
-      };
-      Redirect.waitFor = 'main.login';
-      event.preventDefault();
-      $state.go('main.login');
-    } else if (Redirect.to.state && fromState.name === Redirect.waitFor) {
-      delete Redirect.waitFor;
-      $state.go(Redirect.to.state.name, Redirect.to.params || {});
-      Redirect.to = {};
-    }
-  });
+  //$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    //if (toState.access === 'member' && !$rootScope.author) {
+      //Redirect.to = {
+        //state: toState,
+        //params: fromParams
+      //};
+      //Redirect.waitFor = 'login';
+      //event.preventDefault();
+      //$state.go('login');
+    //} else if (Redirect.to.state && fromState.name === Redirect.waitFor) {
+      //delete Redirect.waitFor;
+      //$state.go(Redirect.to.state.name, Redirect.to.params || {});
+      //Redirect.to = {};
+    //}
+  //});
 });
