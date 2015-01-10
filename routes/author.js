@@ -65,7 +65,7 @@ router.get('/', function(req, res, next) {
   } else if (req.cookies.author) {
     neoResponseCallback(res, null, req.author);
   } else {
-    res.status(200).end();
+    res.status(404).json({ description: 'Not Found' });
   }
 });
 

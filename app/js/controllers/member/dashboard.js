@@ -1,7 +1,4 @@
-angular.module('app').controller('Dashboard', function($scope, Api, author, worlds, stories) {
-  author.worlds = worlds;
-  author.stories = stories;
-  $scope.$root.author = author
+angular.module('app').controller('Dashboard', function($scope, Api) {
   $scope.saveWorld = function() {
     $scope.newWorldForm.error = '';
     $scope.newWorldForm.errorDismissed = false;
